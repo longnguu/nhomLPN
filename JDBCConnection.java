@@ -16,7 +16,7 @@ public class JDBCConnection {
     public static Connection getJDBCConnection() {
 //        final String url = "jtds:jdbc:sqlserver://DESKTOP-836R118:1433/QuanLiTaiChinh?autoReconnect=true&useSSL=false";
 //        final String user = "root";
-//        final String password = "0934720343lois";
+//        final String password = "";
         try{
 //            Class.forName("com.mysql.jdbc.Driver");
                Class.forName("net.sourceforge.jtds.jdbc.Driver");
