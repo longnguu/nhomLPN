@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package UserDao;
 
 import User.May;
@@ -13,11 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-
-/**
- *
- * @author MY LAPTOP
- */
 public class UserDao {
     public List<User> getAllUser() throws SQLException{
         List<User> users = new ArrayList<>();
