@@ -282,4 +282,233 @@ public class UserDao {
             e.printStackTrace();
         }
     }
+      public List<ThucPham> getAllTP() throws SQLException{
+        List<ThucPham> users = new ArrayList<>();
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql= "SELECT * FROM thucpham";
+        User user=new User();
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                ThucPham tp = new ThucPham();
+                
+                tp.setId(rs.getInt("id"));
+                tp.setSoLuong(rs.getInt("soluong"));
+                tp.setGia(rs.getLong("Gia"));
+                tp.setTen(rs.getString("Ten"));
+                 
+                
+                users.add(tp);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return users;
+    }
+    public List<ThucPham> searchTP(String s) throws SQLException{
+        List<ThucPham> users = new ArrayList<>();
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql= "SELECT * FROM ThucPham where ten like '%"+s+"%'";
+        
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                ThucPham tp = new ThucPham();
+                
+                tp.setId(rs.getInt("id"));
+                tp.setSoLuong(rs.getInt("soluong"));
+                tp.setGia(rs.getLong("Gia"));
+                tp.setTen(rs.getString("Ten"));
+                 
+                
+                users.add(tp);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return users;
+    }
+    public List<ThucPham> searchTP1(String s) throws SQLException{
+        List<ThucPham> users = new ArrayList<>();
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql= "SELECT * FROM ThucPham where ten =  ?";
+        
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,s);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                ThucPham tp = new ThucPham();
+                
+                tp.setId(rs.getInt("id"));
+                tp.setSoLuong(rs.getInt("soluong"));
+                tp.setGia(rs.getLong("Gia"));
+                tp.setTen(rs.getString("Ten"));
+                 
+                
+                users.add(tp);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return users;
+    }
+    public void addTP(ThucPham may){
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql="insert into thucpham(ten,soluong,gia) VALUES (?,?,?)";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            
+            preparedStatement.setString(1,may.getTen());
+            preparedStatement.setInt(2,may.getSoLuong());
+            preparedStatement.setLong(3,may.getGia());
+            
+            int rs= preparedStatement.executeUpdate();
+            
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public void updateTP(ThucPham tp){
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql="UPDATE thucpham SET ten= ?,soluong= ?,gia= ? WHERE id= ?";
+        
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            
+            preparedStatement.setString(1,tp.getTen());
+            preparedStatement.setInt(2,tp.getSoLuong());
+            preparedStatement.setLong(3,tp.getGia());
+            preparedStatement.setInt(4,tp.getId());
+            
+            
+            int rs= preparedStatement.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public void deleteTP(int id){
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql="delete from Thucpham where id = ?";
+        
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            
+            preparedStatement.setInt(1,id);
+               int rs= preparedStatement.executeUpdate();
+            System.out.println(rs);
+            
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public int getIDTPMax(){
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql="select top 1 id from thucpham order by id desc";
+        int num = 0;
+         try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            
+            while(rs.next()){
+                num = (rs.getInt(1));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return num;
+    }
+    public ThucPham getTPById(int Id) {
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql= "SELECT * FROM thucpham where id= ?";
+        
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, Id);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                ThucPham tp = new ThucPham();
+                
+                tp.setId(rs.getInt("id"));
+                tp.setSoLuong(rs.getInt("soluong"));
+                tp.setGia(rs.getLong("Gia"));
+                tp.setTen(rs.getString("Ten"));
+                
+                return tp;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public List<DoanhThu> getAllDT() throws SQLException{
+        List<DoanhThu> dts = new ArrayList<>();
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql= "SELECT * FROM DoanhThu";
+        
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                DoanhThu dt = new DoanhThu();
+                
+                dt.setId(rs.getInt("id"));
+                dt.setNgay(rs.getString("Ngay"));
+                dt.setDoanhThu(rs.getInt("doanhthu"));
+                dt.setGhiChu(rs.getString("ghichu"));
+                
+                
+                
+                dts.add(dt);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return dts;
+    }
+    public void addDT(DoanhThu dt){
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql="insert into doanhthu(ngay,doanhthu,ghichu) VALUES (?,?,?)";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            
+            preparedStatement.setString(1,dt.getNgay());
+            preparedStatement.setLong(2,dt.getDoanhThu());
+            preparedStatement.setString(3,dt.getGhiChu());
+            
+            int rs= preparedStatement.executeUpdate();
+            
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public List<DoanhThu> getDTByDate(String thang, String nam) throws SQLException{
+        List<DoanhThu> dts = new ArrayList<>();
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql= "SELECT * FROM DoanhThu where month(Ngay) = ? and year(Ngay)= ?";
+        
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,thang);
+            preparedStatement.setString(2,nam);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                DoanhThu dt = new DoanhThu();
+                
+                dt.setId(rs.getInt("id"));
+                dt.setNgay(rs.getString("Ngay"));
+                dt.setDoanhThu(rs.getInt("doanhthu"));
+                dt.setGhiChu(rs.getString("ghichu"));
+                
+                
+                
+                dts.add(dt);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return dts;
+    }
 }
