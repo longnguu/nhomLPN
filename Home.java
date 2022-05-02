@@ -29,6 +29,8 @@ public class Home extends javax.swing.JFrame {
         userService = new UserService();
         khachHangPN = new KhachHang();
         jTabbedPane1.addTab("Khách hàng", khachHangPN);
+        jTabbedPane1.addTab("Phiếu nhập",new PhieuNhapThucPham());
+        jTabbedPane1.addTab("DoanhThu", new ThongKeDoanhThu());
         
         defaultTableModel = new DefaultTableModel(){
             @Override
@@ -36,7 +38,6 @@ public class Home extends javax.swing.JFrame {
                 return false;
             }
         };
-        idTF.setText(String.valueOf(userService.getIDKHMax()+1));
         userTable.setModel(defaultTableModel);
         
         defaultTableModel.addColumn("ID");
@@ -59,13 +60,13 @@ public class Home extends javax.swing.JFrame {
         jTabbedPane1.removeAll();
         jTabbedPane1.addTab("Khách hàng", khachHangPN);
         
+        
         defaultTableModel = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column){
                 return false;
             }
         };
-        idTF.setText(String.valueOf(userService.getIDKHMax()+1));
         userTable.setModel(defaultTableModel);
         
         defaultTableModel.addColumn("ID");
@@ -167,7 +168,7 @@ public class Home extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(346, Short.MAX_VALUE)
+                .addContainerGap(403, Short.MAX_VALUE)
                 .addComponent(searchTF, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jButton1)
@@ -195,7 +196,7 @@ public class Home extends javax.swing.JFrame {
 
         jLabel4.setText("Nạp tiền");
 
-        jLabel5.setText("Nợ");
+        jLabel5.setText("Số tiền có sẵn");
 
         jLabel6.setText("Tài khoản");
 
@@ -221,16 +222,17 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(userRB)
                         .addGap(27, 27, 27)
                         .addComponent(adminRB)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 155, Short.MAX_VALUE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(mk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(mk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tkTF)
@@ -332,9 +334,9 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(58, 58, 58))
         );
         jPanel7Layout.setVerticalGroup(
@@ -350,6 +352,8 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(jButton5))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
+
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Danh sách khách hàng"));
 
         userTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -372,7 +376,7 @@ public class Home extends javax.swing.JFrame {
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -400,7 +404,7 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(15, 15, 15)
+                        .addGap(10, 10, 10)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
@@ -412,7 +416,7 @@ public class Home extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -440,7 +444,7 @@ public class Home extends javax.swing.JFrame {
         user.setTen(tenTF.getText());
         user.setHeSoTien(Integer.valueOf(hstTF.getText()));
         user.setNapTien(Long.valueOf(ntTF.getText()));
-        user.setTienNo(-Long.valueOf(noTF.getText())+user.getNapTien()*user.getHeSoTien());
+        user.setTienNo(Long.valueOf(noTF.getText())+user.getNapTien()*user.getHeSoTien());
         user.setTaiKhoan(tkTF.getText());
         user.setMatKhau(String.valueOf(mkTF.getPassword()));      
        String role= null;
@@ -494,7 +498,7 @@ public class Home extends javax.swing.JFrame {
             tenTF.setText(String.valueOf(user.getTen()));
             hstTF.setText(String.valueOf(user.getHeSoTien()));
             ntTF.setText(String.valueOf(user.getNapTien()));
-            noTF.setText(String.valueOf(0));
+            noTF.setText(String.valueOf(user.getTienNo()));
             tkTF.setText(String.valueOf(user.getTaiKhoan()));
             mkTF.setText(String.valueOf(user.getMatKhau()));
             
@@ -520,7 +524,7 @@ public class Home extends javax.swing.JFrame {
         user.setTen(tenTF.getText());
         user.setHeSoTien(Integer.valueOf(hstTF.getText()));
         user.setNapTien(Long.valueOf(ntTF.getText()));
-        user.setTienNo(-Long.valueOf(noTF.getText())+user.getNapTien()*user.getHeSoTien());
+        user.setTienNo(Long.valueOf(noTF.getText())+user.getNapTien()*user.getHeSoTien());
         user.setTaiKhoan(tkTF.getText());
         user.setMatKhau(String.valueOf(mkTF.getPassword()));      
        String role= null;
