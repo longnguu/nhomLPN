@@ -7,7 +7,9 @@ package View;
 import User.User;
 import UserService.UserService;
 import java.awt.CardLayout;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,6 +28,7 @@ public class Home extends javax.swing.JFrame {
     KhachHang khachHangPN;
     public Home() {
         initComponents();
+        hstTF.setText("1");
         userService = new UserService();
         khachHangPN = new KhachHang();
         jTabbedPane1.addTab("Khách hàng", khachHangPN);
@@ -42,7 +45,6 @@ public class Home extends javax.swing.JFrame {
         
         defaultTableModel.addColumn("ID");
         defaultTableModel.addColumn("Tên");
-        defaultTableModel.addColumn("Hệ số tiền");
         defaultTableModel.addColumn("Nạp tiền");
         defaultTableModel.addColumn("Số tiền");
         defaultTableModel.addColumn("Tài khoản");
@@ -50,11 +52,12 @@ public class Home extends javax.swing.JFrame {
         
         List<User> users = userService.getAllUser();
         for (User user: users){
-            defaultTableModel.addRow(new Object[]{ user.getId(),user.getTen(),user.getHeSoTien(),user.getNapTien(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
+            defaultTableModel.addRow(new Object[]{ user.getId(),user.getTen(),user.getNapTien(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
         }
     }
     public Home(User user1) {
         initComponents();
+        hstTF.setText("1");
         userService = new UserService();
         khachHangPN = new KhachHang(user1);
         jTabbedPane1.removeAll();
@@ -71,7 +74,6 @@ public class Home extends javax.swing.JFrame {
         
         defaultTableModel.addColumn("ID");
         defaultTableModel.addColumn("Tên");
-        defaultTableModel.addColumn("Hệ số tiền");
         defaultTableModel.addColumn("Nạp tiền");
         defaultTableModel.addColumn("Số tiền");
         defaultTableModel.addColumn("Tài khoản");
@@ -79,7 +81,7 @@ public class Home extends javax.swing.JFrame {
         
         List<User> users = userService.getAllUser();
         for (User user: users){
-            defaultTableModel.addRow(new Object[]{ user.getId(),user.getTen(),user.getHeSoTien(),user.getNapTien(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
+            defaultTableModel.addRow(new Object[]{ user.getId(),user.getTen(),user.getNapTien(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
         }
     }
 
@@ -100,6 +102,8 @@ public class Home extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         searchTF = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         idTF = new javax.swing.JTextField();
@@ -117,6 +121,10 @@ public class Home extends javax.swing.JFrame {
         mkTF = new javax.swing.JPasswordField();
         userRB = new javax.swing.JRadioButton();
         adminRB = new javax.swing.JRadioButton();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        CMNDTF = new javax.swing.JTextField();
+        DCTF = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -163,16 +171,34 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        jButton8.setText("Refresh");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        jButton9.setText("Xem chi tiết");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(403, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(searchTF, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addGap(22, 22, 22))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton9)
+                .addGap(18, 18, 18)
+                .addComponent(jButton8)
+                .addGap(35, 35, 35))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,7 +206,9 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(27, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jButton8)
+                    .addComponent(jButton9))
                 .addContainerGap())
         );
 
@@ -211,6 +239,10 @@ public class Home extends javax.swing.JFrame {
         buttonGroup1.add(adminRB);
         adminRB.setText("Admin");
 
+        jLabel7.setText("CMND");
+
+        jLabel8.setText("Địa chỉ");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -220,10 +252,10 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(userRB)
-                        .addGap(27, 27, 27)
+                        .addGap(31, 31, 31)
                         .addComponent(adminRB)
-                        .addGap(0, 155, Short.MAX_VALUE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(mk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -232,7 +264,9 @@ public class Home extends javax.swing.JFrame {
                                 .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tkTF)
@@ -241,7 +275,9 @@ public class Home extends javax.swing.JFrame {
                             .addComponent(hstTF)
                             .addComponent(ntTF)
                             .addComponent(noTF)
-                            .addComponent(mkTF))))
+                            .addComponent(mkTF)
+                            .addComponent(CMNDTF)
+                            .addComponent(DCTF))))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -277,8 +313,16 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(mkTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(userRB)
-                    .addComponent(adminRB))
+                    .addComponent(jLabel7)
+                    .addComponent(CMNDTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(DCTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(adminRB)
+                    .addComponent(userRB))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -372,11 +416,11 @@ public class Home extends javax.swing.JFrame {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -416,7 +460,7 @@ public class Home extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -446,13 +490,15 @@ public class Home extends javax.swing.JFrame {
         user.setNapTien(Long.valueOf(ntTF.getText()));
         user.setTienNo(Long.valueOf(noTF.getText())+user.getNapTien()*user.getHeSoTien());
         user.setTaiKhoan(tkTF.getText());
-        user.setMatKhau(String.valueOf(mkTF.getPassword()));      
+        user.setMatKhau(String.valueOf(mkTF.getPassword())); 
+        user.setCMND(String.valueOf(CMNDTF.getText()));
+        user.setDiaChi(String.valueOf(DCTF.getText()));
        String role= null;
        if (adminRB.isSelected()){
-           role="Role_admin";
+           role="admin";
        }
        if (userRB.isSelected()){
-           role="Role_user";
+           role="user";
        }
        user.setQuyen(role);
        
@@ -461,7 +507,7 @@ public class Home extends javax.swing.JFrame {
         defaultTableModel.setRowCount(0);
         List<User> users = userService.getAllUser();
         for (User user: users){
-            defaultTableModel.addRow(new Object[]{ user.getId(),user.getTen(),user.getHeSoTien(),user.getNapTien(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
+            defaultTableModel.addRow(new Object[]{ user.getId(),user.getTen(),user.getNapTien(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -480,7 +526,7 @@ public class Home extends javax.swing.JFrame {
         defaultTableModel.setRowCount(0);
         List<User> users = userService.getAllUser();
         for (User user: users){
-            defaultTableModel.addRow(new Object[]{ user.getId(),user.getTen(),user.getHeSoTien(),user.getNapTien(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
+            defaultTableModel.addRow(new Object[]{ user.getId(),user.getTen(),user.getNapTien(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
         }
     }}
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -497,10 +543,12 @@ public class Home extends javax.swing.JFrame {
             idTF.setText(String.valueOf(user.getId()));
             tenTF.setText(String.valueOf(user.getTen()));
             hstTF.setText(String.valueOf(user.getHeSoTien()));
-            ntTF.setText(String.valueOf(user.getNapTien()));
+            ntTF.setText(String.valueOf("0"));
             noTF.setText(String.valueOf(user.getTienNo()));
             tkTF.setText(String.valueOf(user.getTaiKhoan()));
             mkTF.setText(String.valueOf(user.getMatKhau()));
+            CMNDTF.setText(String.valueOf(user.getCMND()));
+            DCTF.setText(String.valueOf(user.getDiaChi()));
             
             if (user.getQuyen().equals("admin")){
                 adminRB.setSelected(true);
@@ -526,7 +574,9 @@ public class Home extends javax.swing.JFrame {
         user.setNapTien(Long.valueOf(ntTF.getText()));
         user.setTienNo(Long.valueOf(noTF.getText())+user.getNapTien()*user.getHeSoTien());
         user.setTaiKhoan(tkTF.getText());
-        user.setMatKhau(String.valueOf(mkTF.getPassword()));      
+        user.setMatKhau(String.valueOf(mkTF.getPassword())); 
+        user.setCMND(String.valueOf(CMNDTF.getText()));
+        user.setDiaChi(String.valueOf(DCTF.getText()));
        String role= null;
        if (adminRB.isSelected()){
            role="admin";
@@ -541,7 +591,7 @@ public class Home extends javax.swing.JFrame {
        defaultTableModel.setRowCount(0);
         List<User> users = userService.getAllUser();
         for (User user: users){
-            defaultTableModel.addRow(new Object[]{ user.getId(),user.getTen(),user.getHeSoTien(),user.getNapTien(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
+            defaultTableModel.addRow(new Object[]{ user.getId(),user.getTen(),user.getNapTien(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
         
         }
         CardLayout card = (CardLayout)(jPanel9.getLayout());
@@ -553,6 +603,34 @@ public class Home extends javax.swing.JFrame {
         new Login().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        defaultTableModel.setRowCount(0);
+         List<User> users = userService.getAllUser();
+        for (User user: users){
+            defaultTableModel.addRow(new Object[]{ user.getId(),user.getTen(),user.getNapTien(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        int row=userTable.getSelectedRow();
+        if (row==-1){
+            JOptionPane.showMessageDialog(Home.this,"Vui long chon user truoc","Loi",JOptionPane.ERROR_MESSAGE);
+        }else{
+            User user=new User();
+            int userId= Integer.valueOf(String.valueOf(userTable.getValueAt(row,0)));
+            user= userService.getUserById(userId);
+            JOptionPane.showMessageDialog(Home.this,
+                    "ID: "+user.getId()
+                    +"\nTen: "+user.getTen()
+                    +"\nPassword: "+user.getMatKhau()
+                    +"\nCMND"+user.getCMND()
+                    +"\nDia chi: "+user.getDiaChi()
+            ,"Thong tin khach hang",JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -590,6 +668,8 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField CMNDTF;
+    private javax.swing.JTextField DCTF;
     private javax.swing.JRadioButton adminRB;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField hstTF;
@@ -601,12 +681,16 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
