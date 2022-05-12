@@ -12,7 +12,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -38,6 +39,7 @@ public class Oder extends javax.swing.JFrame {
     }
     public Oder(User user){
         initComponents();
+        this.user=user;
         userService = new UserService();
        jLabel1.setText("ID khách hàng: "+ user.getId()+" Tên KH: "+user.getTen());
         List<ThucPham> tps = userService.getAllTP();
@@ -70,7 +72,7 @@ public class Oder extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText("Order món");
 
         jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
@@ -125,6 +127,9 @@ public class Oder extends javax.swing.JFrame {
         List<ThucPham> tps=userService.searchTP1(String.valueOf(jComboBox1.getSelectedItem()));
         for (ThucPham tp1:tps){
             jLabel2.setText(String.valueOf(tp1.getGia()+2000));
+//            java.net.URL imgURL = Oder.class.getResource("file:/E:/CodeJava/Baitap/QuanLyTiemNet_New/src/img/pepsi.jpg");
+//            ImageIcon icon =new ImageIcon(imgURL, "Drink");
+//            new JLabel("",icon,JLabel.CENTER);
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
@@ -137,6 +142,12 @@ public class Oder extends javax.swing.JFrame {
         dt.setNgay(formatted);
         dt.setDoanhThu(Long.valueOf(jLabel2.getText())*Integer.valueOf(String.valueOf(jSpinner1.getValue())));
         dt.setGhiChu("Khach dat mua");
+        user.setTienNo(user.getTienNo()-Long.valueOf(jLabel2.getText())*Integer.valueOf(String.valueOf(jSpinner1.getValue())));
+        List<ThucPham> tp1 = userService.searchTP1(String.valueOf(jComboBox1.getSelectedItem()));
+        ThucPham tp= tp1.get(0);
+        tp.setSoLuong(tp.getSoLuong()-Integer.valueOf(String.valueOf(jSpinner1.getValue())));
+        userService.updateTP(tp);
+        userService.updateUser(user);
         userService.addDT(dt);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
