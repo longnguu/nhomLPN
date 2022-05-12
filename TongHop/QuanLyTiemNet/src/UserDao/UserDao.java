@@ -40,6 +40,8 @@ public class UserDao {
                 user.setTaiKhoan(rs.getString("TaiKhoan"));
                 user.setMatKhau(rs.getString("MatKhau"));
                 user.setQuyen(rs.getString("Quyen"));
+                user.setCMND(rs.getString("CMND"));
+                user.setDiaChi(rs.getString("DiaChi"));
                 
                 
                 users.add(user);
@@ -68,6 +70,8 @@ public class UserDao {
                 user.setTaiKhoan(rs.getString("TaiKhoan"));
                 user.setMatKhau(rs.getString("MatKhau"));
                 user.setQuyen(rs.getString("Quyen"));
+                user.setCMND(rs.getString("CMND"));
+                user.setDiaChi(rs.getString("DiaChi"));
                 
                 return user;
             }
@@ -95,6 +99,8 @@ public class UserDao {
                 user.setTaiKhoan(rs.getString("TaiKhoan"));
                 user.setMatKhau(rs.getString("MatKhau"));
                 user.setQuyen(rs.getString("Quyen"));
+                user.setCMND(rs.getString("CMND"));
+                user.setDiaChi(rs.getString("DiaChi"));
                 
                 
                 users.add(user);
@@ -123,6 +129,8 @@ public class UserDao {
                 user.setTaiKhoan(rs.getString("TaiKhoan"));
                 user.setMatKhau(rs.getString("MatKhau"));
                 user.setQuyen(rs.getString("Quyen"));
+                user.setCMND(rs.getString("CMND"));
+                user.setDiaChi(rs.getString("DiaChi"));
                 
                 return user;
             }
@@ -133,7 +141,7 @@ public class UserDao {
     }
     public void addUser(User user){
         Connection connection = KetNoiSQL.getJDBCConnection();
-        String sql="insert into khachhang(ten,hesotien,naptien,tienno,taikhoan,matkhau,quyen) VALUES (?,?,?,?,?,?,?)";
+        String sql="insert into khachhang(ten,hesotien,naptien,tienno,taikhoan,matkhau,quyen,cmnd,DiaChi) VALUES (?,?,?,?,?,?,?,?,?)";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             
@@ -144,6 +152,8 @@ public class UserDao {
             preparedStatement.setString(5,user.getTaiKhoan());
             preparedStatement.setString(6,user.getMatKhau());
             preparedStatement.setString(7,user.getQuyen());
+            preparedStatement.setString(8,user.getCMND());
+            preparedStatement.setString(9,user.getDiaChi());
             
             int rs= preparedStatement.executeUpdate();
             
@@ -153,7 +163,7 @@ public class UserDao {
     }
     public void updateUser(User user){
         Connection connection = KetNoiSQL.getJDBCConnection();
-        String sql="UPDATE KhachHang SET ten= ?,hesotien= ?,naptien= ?,tienno= ?,taikhoan= ?,matkhau= ?,quyen= ? WHERE id= ?";
+        String sql="UPDATE KhachHang SET ten= ?,hesotien= ?,naptien= ?,tienno= ?,taikhoan= ?,matkhau= ?,quyen= ?,CMND= ?,DiaChi = ? WHERE id= ?";
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -165,7 +175,9 @@ public class UserDao {
             preparedStatement.setString(5,user.getTaiKhoan());
             preparedStatement.setString(6,user.getMatKhau());
             preparedStatement.setString(7,user.getQuyen());
-            preparedStatement.setInt(8,user.getId());
+            preparedStatement.setString(8,user.getCMND());
+            preparedStatement.setString(9,user.getDiaChi());
+            preparedStatement.setInt(10,user.getId());
             
             
             int rs= preparedStatement.executeUpdate();
