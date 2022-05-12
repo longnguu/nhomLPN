@@ -73,18 +73,18 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         dtTable = new javax.swing.JTable();
 
-        jButton1.setText("L·ªçc");
+        jButton1.setText("L?c");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Th√°ng");
+        jLabel1.setText("Th·ng");
 
-        jLabel2.setText("NƒÉm");
+        jLabel2.setText("N?m");
 
-        jButton2.setText("Refresh");
+        jButton2.setText("L‡m m?i");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -119,7 +119,7 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
                         .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
