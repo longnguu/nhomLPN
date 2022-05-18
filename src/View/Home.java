@@ -19,10 +19,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Home extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Home
-     */
-    UserService userService;//eeee//
+    
+     
+    UserService userService;
     User user;
     DefaultTableModel defaultTableModel,defaultTableModel1,defaultTableModel2;
     KhachHang khachHangPN;
