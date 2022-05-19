@@ -32,8 +32,6 @@ public class Home extends javax.swing.JFrame {
         userService = new UserService();
         khachHangPN = new KhachHang();
         jTabbedPane1.addTab("Khách hàng", khachHangPN);
-        jTabbedPane1.addTab("Phiếu nhập",new PhieuNhapThucPham());
-        jTabbedPane1.addTab("DoanhThu", new ThongKeDoanhThu());
         
         defaultTableModel = new DefaultTableModel(){
             @Override
@@ -58,7 +56,6 @@ public class Home extends javax.swing.JFrame {
         initComponents();
         hstTF.setText("1");
         userService = new UserService();
-        khachHangPN = new KhachHang(user1);
         jTabbedPane1.removeAll();
         jTabbedPane1.addTab("Khách hàng", khachHangPN);
         
@@ -598,8 +595,6 @@ public class Home extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:'
-        new Login().setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
