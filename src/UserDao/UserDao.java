@@ -4,6 +4,7 @@
  */
 package UserDao;
 
+import User.May;
 import User.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -161,6 +162,96 @@ public class UserDao {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             
             preparedStatement.setInt(1,id);
+               int rs= preparedStatement.executeUpdate();
+            
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
+    //Nhã 
+    public List<May> getAllMay() throws SQLException{
+        List<May> users = new ArrayList<>();
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql= "SELECT * FROM May";
+        User user=new User();
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                May may = new May();
+                
+                may.setIdMay(rs.getString("id"));
+                may.setIdKhach(rs.getInt("idKhach"));
+                may.setDonGia(rs.getLong("DonGia"));
+                may.setBD(rs.getString("nbd"));
+                user=getUserById(may.getIdKhach());
+                may.setTenKhach(user.getTen()); 
+                
+                users.add(may);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return users;
+    }
+    public List<May> getAllMayByIdKH(int id) throws SQLException{
+        List<May> users = new ArrayList<>();
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql= "SELECT * FROM May where idKhach = ? ";
+        User user=new User();
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1,id);
+            
+            ResultSet rs = preparedStatement.executeQuery();
+            
+            while (rs.next()){
+                May may = new May();
+                
+                may.setIdMay(rs.getString("id"));
+                may.setIdKhach(rs.getInt("idKhach"));
+                may.setDonGia(rs.getLong("DonGia"));
+                may.setBD(rs.getString("NBD"));
+                
+                user=getUserById(may.getIdKhach());
+                may.setTenKhach(user.getTen()); 
+                
+                users.add(may);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return users;
+    }
+    public void addMay(May may){
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql="insert into may(id,idKhach,dongia,NBD) VALUES (?,?,?,?)";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            
+            preparedStatement.setString(1,may.getIdMay());
+            preparedStatement.setInt(2,may.getIdKhach());
+            preparedStatement.setLong(3,may.getDonGia());
+            preparedStatement.setString(4,may.getBD());
+            
+            int rs= preparedStatement.executeUpdate();
+            
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        User user= new User();
+        user = getUserById(may.getIdKhach());
+        may.setTenKhach(user.getTen());
+    }
+    public void deleteMay(String id){
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql="delete from May where id = ?";
+        
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            
+            preparedStatement.setString(1,id);
                int rs= preparedStatement.executeUpdate();
             
         }catch (SQLException e){

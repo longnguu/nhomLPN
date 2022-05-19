@@ -520,11 +520,6 @@ public class KhachHang extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int id= Integer.valueOf(String.valueOf(jComboBox2.getSelectedItem()));
-        User user = new User();
-        user=userService.getUserById(id);
-        System.out.print(user.getTen());
-        new Oder(user).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
