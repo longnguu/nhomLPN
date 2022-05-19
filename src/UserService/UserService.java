@@ -4,6 +4,7 @@
  */
 package UserService;
 
+import User.May;
 import User.User;
 import UserDao.UserDao;
 import java.sql.SQLException;
@@ -47,5 +48,28 @@ public class UserService {
     }
     public void updateUser(User user){
         userDao.updateUser(user);
+    }
+    //Nhã
+    public void addMay(May may){
+        userDao.addMay(may);
+    }
+    public void deleteMay(String id){
+        userDao.deleteMay(id);
+    }
+     public List<May> getAllMay(){
+        try {
+            return userDao.getAllMay();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+      public List<May> getAllMayByIdKH(int id){
+        try {
+            return userDao.getAllMayByIdKH(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }
