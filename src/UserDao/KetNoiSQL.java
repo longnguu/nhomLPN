@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class KetNoiSQL {
     private Connection con = null;
     public static Connection getJDBCConnection() {
-        final String url = "jdbc:jtds:sqlserver://LAPTOP-NS4H03L1:1433/QuanLyTiemNet;";
+        final String url = "jdbc:jtds:sqlserver://DESKTOP-836R118:1433/QuanLyTiemNet;";
         final String user = "sa";
         final String password="123456";
         try{
