@@ -1,10 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package UserService;
 
 import User.May;
+import User.ThucPham;
 import User.User;
 import UserDao.UserDao;
 import java.sql.SQLException;
@@ -71,5 +68,24 @@ public class UserService {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+      
+    public List<ThucPham> getAllThucPham(){
+        return userDao.getAllThucPham();
+    }
+    public void addThucPham(ThucPham tp){
+        userDao.addThucPham(tp);
+    }
+    public void updateThucPham(ThucPham tp){
+        userDao.updateThucPham(tp);
+    }
+    public void deleteThucPham(int id){
+        userDao.deleteThucPham(id);
+    }
+    public List<ThucPham> searchThucPham(String s){
+        return userDao.searchThucPham(s);
+    }
+    public ThucPham getThucPhamById(int id){
+        return userDao.getThucPhamById(id);
     }
 }
