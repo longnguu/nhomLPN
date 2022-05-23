@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package View;
 
 import User.User;
@@ -12,16 +8,7 @@ import java.util.List;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
-/**
- *
- * @author MY LAPTOP
- */
 public class Home extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Home
-     */
     UserService userService;
     User user;
     DefaultTableModel defaultTableModel,defaultTableModel1,defaultTableModel2;
@@ -32,7 +19,6 @@ public class Home extends javax.swing.JFrame {
         userService = new UserService();
         khachHangPN = new KhachHang();
         jTabbedPane1.addTab("Khách hàng", khachHangPN);
-        
         defaultTableModel = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column){

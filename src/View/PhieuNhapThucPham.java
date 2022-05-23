@@ -24,9 +24,9 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
         userService = new UserService();
         List<ThucPham> thucPhams = new ArrayList<>();
         thucPhams = userService.getAllThucPham();
-        for(ThucPham tp : thucPhams){
+        for(ThucPham tp : thucPhams)
             model.addRow(new Object[] { tp.getId(),tp.getTen(),tp.getGia(),tp.getSoLuong()});
-        }
+        idTF.setEditable(false);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -40,17 +40,17 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        idTF = new javax.swing.JTextField();
+        tenTF = new javax.swing.JTextField();
+        giaTF = new javax.swing.JTextField();
+        soLuongTF = new javax.swing.JTextField();
+        insertBT = new javax.swing.JButton();
+        refreshBT = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        deleteBT = new javax.swing.JButton();
+        editBT = new javax.swing.JButton();
         jTextField5 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        searchBT = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableTP = new javax.swing.JTable();
@@ -92,11 +92,21 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
 
         jLabel5.setText("Số lương nhập");
 
-        jButton1.setBackground(new java.awt.Color(51, 255, 51));
-        jButton1.setText("Xác nhận");
+        insertBT.setBackground(new java.awt.Color(51, 255, 51));
+        insertBT.setText("Thêm");
+        insertBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                insertBTActionPerformed(evt);
+            }
+        });
 
-        jButton2.setBackground(new java.awt.Color(51, 153, 255));
-        jButton2.setText("Tải lại");
+        refreshBT.setBackground(new java.awt.Color(51, 153, 255));
+        refreshBT.setText("Tải lại");
+        refreshBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshBTActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -113,15 +123,16 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
                             .addComponent(jLabel5))
                         .addGap(46, 46, 46)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                            .addComponent(jTextField3)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField1)))
+                            .addComponent(soLuongTF, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                            .addComponent(giaTF)
+                            .addComponent(tenTF)
+                            .addComponent(idTF)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jButton1)
-                        .addGap(77, 77, 77)
-                        .addComponent(jButton2)))
+                        .addGap(67, 67, 67)
+                        .addComponent(insertBT)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(refreshBT)
+                        .addGap(52, 52, 52)))
                 .addGap(35, 35, 35))
         );
         jPanel3Layout.setVerticalGroup(
@@ -130,37 +141,42 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
                 .addGap(51, 51, 51)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(idTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tenTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(giaTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(soLuongTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(insertBT)
+                    .addComponent(refreshBT))
                 .addGap(35, 35, 35))
         );
 
-        jButton3.setBackground(new java.awt.Color(255, 51, 51));
-        jButton3.setText("Xóa");
-
-        jButton4.setBackground(new java.awt.Color(51, 255, 51));
-        jButton4.setText("Thêm");
-
-        jButton5.setBackground(new java.awt.Color(51, 153, 255));
-        jButton5.setText("Tìm");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        deleteBT.setBackground(new java.awt.Color(255, 51, 51));
+        deleteBT.setText("Xóa");
+        deleteBT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                deleteBTActionPerformed(evt);
+            }
+        });
+
+        editBT.setBackground(new java.awt.Color(51, 255, 51));
+        editBT.setText("Sửa");
+
+        searchBT.setBackground(new java.awt.Color(51, 153, 255));
+        searchBT.setText("Tìm");
+        searchBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBTActionPerformed(evt);
             }
         });
 
@@ -170,13 +186,13 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton3)
+                .addComponent(deleteBT)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(editBT, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
+                .addComponent(searchBT)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -184,10 +200,10 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
+                    .addComponent(deleteBT)
+                    .addComponent(editBT)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5))
+                    .addComponent(searchBT))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
@@ -262,9 +278,43 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void searchBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_searchBTActionPerformed
+
+    private void deleteBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBTActionPerformed
+        // TODO add your handling code here:
+        int row = tableTP.getSelectedRow();
+        int id = Integer.parseInt(String.valueOf(tableTP.getValueAt(row, 0)));
+        userService.deleteThucPham(id);
+        model.setRowCount(0);
+        List<ThucPham> thucPhams = new ArrayList<>();
+        thucPhams = userService.getAllThucPham();
+        for(ThucPham tp : thucPhams)
+            model.addRow(new Object[]{tp.getId(),tp.getTen(),tp.getGia(),tp.getSoLuong()});
+    }//GEN-LAST:event_deleteBTActionPerformed
+
+    private void refreshBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBTActionPerformed
+        // TODO add your handling code here:
+        idTF.setText("");
+        tenTF.setText("");
+        giaTF.setText("");
+        soLuongTF.setText("");
+    }//GEN-LAST:event_refreshBTActionPerformed
+
+    private void insertBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertBTActionPerformed
+        // TODO add your handling code here:
+        ThucPham thucPham = new ThucPham();
+        thucPham.setTen(tenTF.getText());
+        thucPham.setGia(Long.parseLong(giaTF.getText()));
+        thucPham.setSoLuong(Integer.parseInt(soLuongTF.getText()));
+        userService.addThucPham(thucPham);
+        model.setRowCount(0);
+        List<ThucPham> thucPhams = new ArrayList<>();
+        thucPhams = userService.getAllThucPham();
+        for(ThucPham tp: thucPhams)
+            model.addRow(new Object[]{tp.getId(),tp.getTen(),tp.getGia(),tp.getSoLuong()});
+    }//GEN-LAST:event_insertBTActionPerformed
 
     /**
      * @param args the command line arguments
@@ -302,11 +352,11 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton deleteBT;
+    private javax.swing.JButton editBT;
+    private javax.swing.JTextField giaTF;
+    private javax.swing.JTextField idTF;
+    private javax.swing.JButton insertBT;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -318,11 +368,11 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JButton refreshBT;
+    private javax.swing.JButton searchBT;
+    private javax.swing.JTextField soLuongTF;
     private javax.swing.JTable tableTP;
+    private javax.swing.JTextField tenTF;
     // End of variables declaration//GEN-END:variables
 }
