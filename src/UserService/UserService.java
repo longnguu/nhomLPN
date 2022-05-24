@@ -1,5 +1,6 @@
 package UserService;
 
+import User.DoanhThu;
 import User.May;
 import User.ThucPham;
 import User.User;
@@ -90,5 +91,25 @@ public class UserService {
     }
     public ThucPham getThucPhamById(int id){
         return userDao.getThucPhamById(id);
+    }
+    
+    public List<DoanhThu> getAllDT(){
+        try {
+            return userDao.getAllDT();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public void addDT(DoanhThu dt){
+        userDao.addDT(dt);
+    }
+    public List<DoanhThu> getDTByDate(String thang,String nam){
+        try {
+            return userDao.getDTByDate(thang,nam);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }
