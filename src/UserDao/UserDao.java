@@ -52,6 +52,33 @@ public class UserDao {
         }
         return users;
     }
+    public User getUserByUserName(String userName) {
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql= "SELECT * FROM khachhang where TaiKhoan = ?";
+        
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, userName);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                User user = new User();
+                
+                user.setId(rs.getInt("id"));
+                user.setTen(rs.getString("ten"));
+                user.setHeSoTien(rs.getInt("hesotien"));
+                user.setNapTien(rs.getLong("naptien"));
+                user.setTienNo(rs.getLong("tienno"));
+                user.setTaiKhoan(rs.getString("TaiKhoan"));
+                user.setMatKhau(rs.getString("MatKhau"));
+                user.setQuyen(rs.getString("Quyen"));
+                
+                return user;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
     public List<User> searchUser(String s) throws SQLException{
         List<User> users = new ArrayList<>();
         Connection connection = KetNoiSQL.getJDBCConnection();
