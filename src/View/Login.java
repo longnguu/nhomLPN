@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View;
-
+import User.User;
+import UserService.UserService;
+import javax.swing.JOptionPane;
 /**
  *
  * @author phien
@@ -13,6 +15,8 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    UserService userService;
+    User user;
     public Login() {
         initComponents();
     }
@@ -28,8 +32,8 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        tkTF = new javax.swing.JTextField();
+        mkTF = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
@@ -43,11 +47,16 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel2.setText("Mật khẩu");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 430, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 390, 98, -1));
-        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 430, 98, -1));
+        getContentPane().add(tkTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 390, 98, -1));
+        getContentPane().add(mkTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 430, 98, -1));
 
         jButton1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jButton1.setText("Đăng nhập");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 490, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/LNP.png"))); // NOI18N
@@ -56,6 +65,36 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String userName= tkTF.getText().replaceAll(" ","");
+        String password= String.valueOf(mkTF.getPassword());
+            
+        userService=new UserService();
+        user=userService.getUserByUserName(userName);
+            
+            if (this.user == null)
+            {
+                JOptionPane.showMessageDialog(Login.this,"Sai thong tin tai khoan","Loi",JOptionPane.ERROR_MESSAGE);
+            }
+                else {
+                String pass=user.getMatKhau();
+                pass=pass.replace(" ","");
+                if(pass.equals(password)==false){
+                    JOptionPane.showMessageDialog(Login.this,"Sai thong tin mat khau","Loi",JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(Login.this,"Dang nhap thanh cong","Chao mung",JOptionPane.INFORMATION_MESSAGE);
+                    if (user.getQuyen().equals("admin"))
+                    {
+                        new Home().setVisible(true);
+                        this.dispose();
+                   }else{
+                        new Home(user).setVisible(true);
+                    }
+            }}
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -97,7 +136,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField mkTF;
+    private javax.swing.JTextField tkTF;
     // End of variables declaration//GEN-END:variables
 }

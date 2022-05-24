@@ -34,6 +34,9 @@ public class UserService {
         }
         return null;
     }
+    public User getUserByUserName(String userName){
+        return userDao.getUserByUserName(userName);
+    }
      public void addUser(User user){
         userDao.addUser(user);
     }
