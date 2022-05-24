@@ -5,6 +5,7 @@
  */
 package UserDao;
 
+import User.DoanhThu;
 import User.May;
 import User.ThucPham;
 import User.User;
@@ -396,5 +397,74 @@ public class UserDao {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return thucPham;
+    }
+    
+    public List<DoanhThu> getAllDT() throws SQLException{
+        List<DoanhThu> dts = new ArrayList<>();
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql= "SELECT * FROM DoanhThu";
+        
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                DoanhThu dt = new DoanhThu();
+                
+                dt.setId(rs.getInt("id"));
+                dt.setNgay(rs.getString("Ngay"));
+                dt.setDoanhThu(rs.getInt("doanhthu"));
+                dt.setGhiChu(rs.getString("ghichu"));
+                
+                
+                
+                dts.add(dt);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return dts;
+    }
+    public void addDT(DoanhThu dt){
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql="insert into doanhthu(ngay,doanhthu,ghichu) VALUES (?,?,?)";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            
+            preparedStatement.setString(1,dt.getNgay());
+            preparedStatement.setLong(2,dt.getDoanhThu());
+            preparedStatement.setString(3,dt.getGhiChu());
+            
+            int rs= preparedStatement.executeUpdate();
+            
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public List<DoanhThu> getDTByDate(String thang, String nam) throws SQLException{
+        List<DoanhThu> dts = new ArrayList<>();
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql= "SELECT * FROM DoanhThu where month(Ngay) = ? and year(Ngay)= ?";
+        
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,thang);
+            preparedStatement.setString(2,nam);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                DoanhThu dt = new DoanhThu();
+                
+                dt.setId(rs.getInt("id"));
+                dt.setNgay(rs.getString("Ngay"));
+                dt.setDoanhThu(rs.getInt("doanhthu"));
+                dt.setGhiChu(rs.getString("ghichu"));
+                
+                
+                
+                dts.add(dt);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return dts;
     }
 }
