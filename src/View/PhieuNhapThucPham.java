@@ -49,7 +49,7 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         deleteBT = new javax.swing.JButton();
         editBT = new javax.swing.JButton();
-        jTextField5 = new javax.swing.JTextField();
+        searchTF = new javax.swing.JTextField();
         searchBT = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -171,6 +171,11 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
 
         editBT.setBackground(new java.awt.Color(51, 255, 51));
         editBT.setText("Sửa");
+        editBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editBTActionPerformed(evt);
+            }
+        });
 
         searchBT.setBackground(new java.awt.Color(51, 153, 255));
         searchBT.setText("Tìm");
@@ -190,7 +195,7 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(editBT, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                .addComponent(searchTF, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchBT)
                 .addContainerGap())
@@ -202,7 +207,7 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteBT)
                     .addComponent(editBT)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchBT))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
@@ -279,7 +284,21 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBTActionPerformed
-        // TODO add your handling code here:
+        if(searchTF.getText().equals("")){
+            List<ThucPham> thucPhams = new ArrayList<>();
+            thucPhams = userService.getAllThucPham();
+            model.setRowCount(0);
+            for(ThucPham tp : thucPhams)
+                model.addRow(new Object[]{tp.getId(),tp.getTen(),tp.getGia(),tp.getSoLuong()});
+        }
+        else{
+            List<ThucPham> thucPhams = new ArrayList<>();
+            thucPhams = userService.searchThucPham(searchTF.getText());
+            model.setRowCount(0);
+            for(ThucPham tp : thucPhams)
+                model.addRow(new Object[]{tp.getId(),tp.getTen(),tp.getGia(),tp.getSoLuong()});
+        }
+        
     }//GEN-LAST:event_searchBTActionPerformed
 
     private void deleteBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBTActionPerformed
@@ -308,13 +327,30 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
         thucPham.setTen(tenTF.getText());
         thucPham.setGia(Long.parseLong(giaTF.getText()));
         thucPham.setSoLuong(Integer.parseInt(soLuongTF.getText()));
-        userService.addThucPham(thucPham);
+        if(idTF.getText().equals(""))
+            userService.addThucPham(thucPham);
+        else{
+            thucPham.setId(Integer.parseInt(idTF.getText()));
+            userService.updateThucPham(thucPham);
+        }
         model.setRowCount(0);
         List<ThucPham> thucPhams = new ArrayList<>();
         thucPhams = userService.getAllThucPham();
         for(ThucPham tp: thucPhams)
             model.addRow(new Object[]{tp.getId(),tp.getTen(),tp.getGia(),tp.getSoLuong()});
     }//GEN-LAST:event_insertBTActionPerformed
+
+    private void editBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBTActionPerformed
+        // TODO add your handling code here:
+        int row = tableTP.getSelectedRow();
+        int id = Integer.parseInt(String.valueOf(tableTP.getValueAt(row, 0)));
+        ThucPham tp = new ThucPham();
+        tp = userService.getThucPhamById(id);
+        idTF.setText(String.valueOf(tp.getId()));
+        tenTF.setText(String.valueOf(tp.getTen()));
+        giaTF.setText(String.valueOf(tp.getGia()));
+        soLuongTF.setText(String.valueOf(tp.getSoLuong()));
+    }//GEN-LAST:event_editBTActionPerformed
 
     /**
      * @param args the command line arguments
@@ -368,9 +404,9 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JButton refreshBT;
     private javax.swing.JButton searchBT;
+    private javax.swing.JTextField searchTF;
     private javax.swing.JTextField soLuongTF;
     private javax.swing.JTable tableTP;
     private javax.swing.JTextField tenTF;

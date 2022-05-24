@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -334,7 +335,7 @@ public class UserDao {
         Connection con = KetNoiSQL.getJDBCConnection();
         PreparedStatement ps;
         try {
-            ps = con.prepareStatement("Select * from where ten = '%"+s+"%'");
+            ps = con.prepareStatement("Select * from ThucPham where ten like '%"+s+"%' ");
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 ThucPham thucPham = new ThucPham();
