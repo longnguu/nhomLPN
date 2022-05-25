@@ -448,7 +448,7 @@ public class KhachHang extends javax.swing.JPanel {
         // TODO add your handling code here:
         int row=mayTable.getSelectedRow();
         if (row==-1){
-            JOptionPane.showMessageDialog(KhachHang.this,"Vui long chon may truoc","Loi",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(KhachHang.this,"Vui long chon may truoc !!","Loi",JOptionPane.ERROR_MESSAGE);
 
         }else{
             int confirm =JOptionPane.showConfirmDialog(KhachHang.this,"Ban chac chan muon tra may khong?");
@@ -520,11 +520,6 @@ public class KhachHang extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int id= Integer.valueOf(String.valueOf(jComboBox2.getSelectedItem()));
-        User user = new User();
-        user=userService.getUserById(id);
-        System.out.print(user.getTen());
-        new Oder(user).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
