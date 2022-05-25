@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package View;
 
 import User.User;
@@ -12,74 +8,64 @@ import java.util.List;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
-/**
- *
- * @author MY LAPTOP
- */
 public class Home extends javax.swing.JFrame {
-
-    
-     
-    UserService userService;
-    User user;
-    DefaultTableModel defaultTableModel,defaultTableModel1,defaultTableModel2;
-    KhachHang khachHangPN;
+    UserService userService_22;
+    User user_22;
+    DefaultTableModel defaultTableModel_22,defaultTableModel1_22,defaultTableModel2_22;
+    KhachHang khachHangPN_22;
     public Home() {
         initComponents();
         hstTF.setText("1");
-        userService = new UserService();
-        khachHangPN = new KhachHang();
-        jTabbedPane1.addTab("Khách hàng", khachHangPN);
-        jTabbedPane1.addTab("Phiếu nhập",new PhieuNhapThucPham());
-        jTabbedPane1.addTab("DoanhThu", new ThongKeDoanhThu());
-        
-        defaultTableModel = new DefaultTableModel(){
+        userService_22 = new UserService();
+        khachHangPN_22 = new KhachHang();
+        jTabbedPane1.addTab("Khách hàng", khachHangPN_22);
+        jTabbedPane1.addTab("Thống kê", new ThongKeDoanhThu());
+        defaultTableModel_22 = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column){
                 return false;
             }
         };
-        userTable.setModel(defaultTableModel);
+        userTable.setModel(defaultTableModel_22);
         
-        defaultTableModel.addColumn("ID");
-        defaultTableModel.addColumn("Tên");
-        defaultTableModel.addColumn("Số tiền");
-        defaultTableModel.addColumn("Tài khoản");
-        defaultTableModel.addColumn("Quyền");
+        defaultTableModel_22.addColumn("ID");
+        defaultTableModel_22.addColumn("Tên");
+        defaultTableModel_22.addColumn("Số tiền");
+        defaultTableModel_22.addColumn("Tài khoản");
+        defaultTableModel_22.addColumn("Quyền");
         
-        List<User> users = userService.getAllUser();
+        setTable();
+    }
+    public void setTable(){
+        defaultTableModel_22.setRowCount(0);
+        List<User> users = userService_22.getAllUser();
         for (User user: users){
-            defaultTableModel.addRow(new Object[]{ user.getId(),user.getTen(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
+            defaultTableModel_22.addRow(new Object[]{ user.getId(),user.getTen(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
         }
     }
     public Home(User user1) {
         initComponents();
         hstTF.setText("1");
-        userService = new UserService();
-        khachHangPN = new KhachHang(user1);
+        userService_22 = new UserService();
         jTabbedPane1.removeAll();
-        jTabbedPane1.addTab("Khách hàng", khachHangPN);
+        jTabbedPane1.addTab("Khách hàng", khachHangPN_22);
         
         
-        defaultTableModel = new DefaultTableModel(){
+        defaultTableModel_22 = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column){
                 return false;
             }
         };
-        userTable.setModel(defaultTableModel);
+        userTable.setModel(defaultTableModel_22);
         
-        defaultTableModel.addColumn("ID");
-        defaultTableModel.addColumn("Tên");
-        defaultTableModel.addColumn("Số tiền");
-        defaultTableModel.addColumn("Tài khoản");
-        defaultTableModel.addColumn("Quyền");
+        defaultTableModel_22.addColumn("ID");
+        defaultTableModel_22.addColumn("Tên");
+        defaultTableModel_22.addColumn("Số tiền");
+        defaultTableModel_22.addColumn("Tài khoản");
+        defaultTableModel_22.addColumn("Quyền");
         
-        List<User> users = userService.getAllUser();
-        for (User user: users){
-            defaultTableModel.addRow(new Object[]{ user.getId(),user.getTen(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
-        }
+        setTable();
     }
 
     /**
@@ -101,6 +87,7 @@ public class Home extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         idTF = new javax.swing.JTextField();
@@ -182,12 +169,20 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        jButton10.setText("Nhập thực phẩm");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(searchTF, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
@@ -205,7 +200,8 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(searchTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1)
                     .addComponent(jButton8)
-                    .addComponent(jButton9))
+                    .addComponent(jButton9)
+                    .addComponent(jButton10))
                 .addContainerGap())
         );
 
@@ -472,24 +468,24 @@ public class Home extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        defaultTableModel.setRowCount(0);
-        List<User> users = userService.searchUser(searchTF.getText());
+        defaultTableModel_22.setRowCount(0);
+        List<User> users = userService_22.searchUser(searchTF.getText());
         for (User user: users){
-            defaultTableModel.addRow(new Object[]{ user.getId(),user.getTen(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
+            defaultTableModel_22.addRow(new Object[]{ user.getId(),user.getTen(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        user= new User();
-        user.setTen(tenTF.getText());
-        user.setHeSoTien(Integer.valueOf(hstTF.getText()));
-        user.setNapTien(Long.valueOf(ntTF.getText()));
-        user.setTienNo(Long.valueOf(noTF.getText())+user.getNapTien()*user.getHeSoTien());
-        user.setTaiKhoan(tkTF.getText());
-        user.setMatKhau(String.valueOf(mkTF.getPassword())); 
-        user.setCMND(String.valueOf(CMNDTF.getText()));
-        user.setDiaChi(String.valueOf(DCTF.getText()));
+        user_22= new User();
+        user_22.setTen(tenTF.getText());
+        user_22.setHeSoTien(Integer.valueOf(hstTF.getText()));
+        user_22.setNapTien(Long.valueOf(ntTF.getText()));
+        user_22.setTienNo(Long.valueOf(noTF.getText())+user_22.getNapTien()*user_22.getHeSoTien());
+        user_22.setTaiKhoan(tkTF.getText());
+        user_22.setMatKhau(String.valueOf(mkTF.getPassword())); 
+        user_22.setCMND(String.valueOf(CMNDTF.getText()));
+        user_22.setDiaChi(String.valueOf(DCTF.getText()));
        String role= null;
        if (adminRB.isSelected()){
            role="admin";
@@ -497,15 +493,11 @@ public class Home extends javax.swing.JFrame {
        if (userRB.isSelected()){
            role="user";
        }
-       user.setQuyen(role);
+       user_22.setQuyen(role);
        
-       userService.addUser(user); 
+       userService_22.addUser(user_22); 
         
-        defaultTableModel.setRowCount(0);
-        List<User> users = userService.getAllUser();
-        for (User user: users){
-            defaultTableModel.addRow(new Object[]{ user.getId(),user.getTen(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
-        }
+        setTable();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -519,11 +511,11 @@ public class Home extends javax.swing.JFrame {
             if (confirm==JOptionPane.YES_OPTION){
                 int userId= Integer.valueOf(String.valueOf(userTable.getValueAt(row,0)));
 
-                userService.deleteUser(userId);
-        defaultTableModel.setRowCount(0);
-        List<User> users = userService.getAllUser();
+                userService_22.deleteUser(userId);
+        defaultTableModel_22.setRowCount(0);
+        List<User> users = userService_22.getAllUser();
         for (User user: users){
-            defaultTableModel.addRow(new Object[]{ user.getId(),user.getTen(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
+            defaultTableModel_22.addRow(new Object[]{ user.getId(),user.getTen(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
         }
     }}
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -535,19 +527,19 @@ public class Home extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(Home.this,"Vui long chon user truoc","Loi",JOptionPane.ERROR_MESSAGE);
         }else{
             int userId= Integer.valueOf(String.valueOf(userTable.getValueAt(row,0)));
-            user = new User();
-            user = userService.getUserById(userId);
-            idTF.setText(String.valueOf(user.getId()));
-            tenTF.setText(String.valueOf(user.getTen()));
-            hstTF.setText(String.valueOf(user.getHeSoTien()));
+            user_22 = new User();
+            user_22 = userService_22.getUserById(userId);
+            idTF.setText(String.valueOf(user_22.getId()));
+            tenTF.setText(String.valueOf(user_22.getTen()));
+            hstTF.setText(String.valueOf(user_22.getHeSoTien()));
             ntTF.setText(String.valueOf("0"));
-            noTF.setText(String.valueOf(user.getTienNo()));
-            tkTF.setText(String.valueOf(user.getTaiKhoan()));
-            mkTF.setText(String.valueOf(user.getMatKhau()));
-            CMNDTF.setText(String.valueOf(user.getCMND()));
-            DCTF.setText(String.valueOf(user.getDiaChi()));
+            noTF.setText(String.valueOf(user_22.getTienNo()));
+            tkTF.setText(String.valueOf(user_22.getTaiKhoan()));
+            mkTF.setText(String.valueOf(user_22.getMatKhau()));
+            CMNDTF.setText(String.valueOf(user_22.getCMND()));
+            DCTF.setText(String.valueOf(user_22.getDiaChi()));
             
-            if (user.getQuyen().equals("admin")){
+            if (user_22.getQuyen().equals("admin")){
                 adminRB.setSelected(true);
             }else userRB.setSelected(true);
             CardLayout card = (CardLayout)(jPanel9.getLayout());
@@ -564,16 +556,16 @@ public class Home extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        user= new User();
-        user.setId(Integer.valueOf(idTF.getText()));
-        user.setTen(tenTF.getText());
-        user.setHeSoTien(Integer.valueOf(hstTF.getText()));
-        user.setNapTien(Long.valueOf(ntTF.getText()));
-        user.setTienNo(Long.valueOf(noTF.getText())+user.getNapTien()*user.getHeSoTien());
-        user.setTaiKhoan(tkTF.getText());
-        user.setMatKhau(String.valueOf(mkTF.getPassword())); 
-        user.setCMND(String.valueOf(CMNDTF.getText()));
-        user.setDiaChi(String.valueOf(DCTF.getText()));
+        user_22= new User();
+        user_22.setId(Integer.valueOf(idTF.getText()));
+        user_22.setTen(tenTF.getText());
+        user_22.setHeSoTien(Integer.valueOf(hstTF.getText()));
+        user_22.setNapTien(Long.valueOf(ntTF.getText()));
+        user_22.setTienNo(Long.valueOf(noTF.getText())+user_22.getNapTien()*user_22.getHeSoTien());
+        user_22.setTaiKhoan(tkTF.getText());
+        user_22.setMatKhau(String.valueOf(mkTF.getPassword())); 
+        user_22.setCMND(String.valueOf(CMNDTF.getText()));
+        user_22.setDiaChi(String.valueOf(DCTF.getText()));
        String role= null;
        if (adminRB.isSelected()){
            role="admin";
@@ -581,14 +573,14 @@ public class Home extends javax.swing.JFrame {
        if (userRB.isSelected()){
            role="user";
        }
-       user.setQuyen(role);
+       user_22.setQuyen(role);
        
-       userService.updateUser(user); 
+       userService_22.updateUser(user_22); 
         
-       defaultTableModel.setRowCount(0);
-        List<User> users = userService.getAllUser();
+       defaultTableModel_22.setRowCount(0);
+        List<User> users = userService_22.getAllUser();
         for (User user: users){
-            defaultTableModel.addRow(new Object[]{ user.getId(),user.getTen(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
+            defaultTableModel_22.addRow(new Object[]{ user.getId(),user.getTen(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
         
         }
         CardLayout card = (CardLayout)(jPanel9.getLayout());
@@ -597,17 +589,11 @@ public class Home extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:'
-        new Login().setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-        defaultTableModel.setRowCount(0);
-         List<User> users = userService.getAllUser();
-        for (User user: users){
-            defaultTableModel.addRow(new Object[]{ user.getId(),user.getTen(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
-        }
+        setTable();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -618,7 +604,7 @@ public class Home extends javax.swing.JFrame {
         }else{
             User user=new User();
             int userId= Integer.valueOf(String.valueOf(userTable.getValueAt(row,0)));
-            user= userService.getUserById(userId);
+            user= userService_22.getUserById(userId);
             JOptionPane.showMessageDialog(Home.this,
                     "ID: "+user.getId()
                     +"\nTen: "+user.getTen()
@@ -628,6 +614,12 @@ public class Home extends javax.swing.JFrame {
             ,"Thong tin khach hang",JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+        new PhieuNhapThucPham().setVisible(true);
+        //this.dispose();
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -672,6 +664,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTextField hstTF;
     private javax.swing.JTextField idTF;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
