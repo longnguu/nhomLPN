@@ -19,6 +19,7 @@ public class Home extends javax.swing.JFrame {
         userService = new UserService();
         khachHangPN = new KhachHang();
         jTabbedPane1.addTab("Khách hàng", khachHangPN);
+        jTabbedPane1.addTab("Thống kê", new ThongKeDoanhThu());
         defaultTableModel = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column){
