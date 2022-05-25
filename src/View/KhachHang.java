@@ -448,7 +448,7 @@ public class KhachHang extends javax.swing.JPanel {
         // TODO add your handling code here:
         int row=mayTable.getSelectedRow();
         if (row==-1){
-            JOptionPane.showMessageDialog(KhachHang.this,"Vui long chon may truoc !","Loi",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(KhachHang.this,"Vui long chon may truoc !!","Loi",JOptionPane.ERROR_MESSAGE);
 
         }else{
             int confirm =JOptionPane.showConfirmDialog(KhachHang.this,"Ban chac chan muon tra may khong?");
