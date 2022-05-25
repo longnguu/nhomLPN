@@ -25,25 +25,25 @@ public class KhachHang extends javax.swing.JPanel {
     /**
      * Creates new form KhachHang
      */
-    UserService userService;
-    User user,user1;
-    DefaultTableModel defaultTableModel,defaultTableModel1,defaultTableModel2;
+    UserService userService_40;
+    User user_40,user1_40;
+    DefaultTableModel defaultTableModel_40,defaultTableModel1_40,defaultTableModel2_40;
     public KhachHang() {
         initComponents();
-        userService = new UserService();
-         defaultTableModel = new DefaultTableModel(){
+        userService_40 = new UserService();
+         defaultTableModel_40 = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column){
                 return false;
             }
         };
-        mayTable.setModel(defaultTableModel);
+        mayTable.setModel(defaultTableModel_40);
         
-        defaultTableModel.addColumn("ID máy");
-        defaultTableModel.addColumn("ID khách");
-        defaultTableModel.addColumn("Tên khách");
-        defaultTableModel.addColumn("Thời gian bắt đầu thuê");
-        defaultTableModel.addColumn("Đơn giá thuê");
+        defaultTableModel_40.addColumn("ID máy");
+        defaultTableModel_40.addColumn("ID khách");
+        defaultTableModel_40.addColumn("Tên khách");
+        defaultTableModel_40.addColumn("Thời gian bắt đầu thuê");
+        defaultTableModel_40.addColumn("Đơn giá thuê");
         
         jComboBox2.removeAllItems();
         jComboBox1.removeAllItems();
@@ -52,18 +52,18 @@ public class KhachHang extends javax.swing.JPanel {
             jComboBox1.addItem("May"+i);
         }
         
-        List<May> mayss = userService.getAllMay();
+        List<May> mayss = userService_40.getAllMay();
         for (May may: mayss){
             jComboBox1.removeItem(String.valueOf(may.getIdMay()));
         }
-        List<User> users = userService.getAllUser();
+        List<User> users = userService_40.getAllUser();
         for (User user: users){
             jComboBox2.addItem(String.valueOf(user.getId()));
         }
-        defaultTableModel.setRowCount(0);
-        List<May> mays = userService.getAllMay();
+        defaultTableModel_40.setRowCount(0);
+        List<May> mays = userService_40.getAllMay();
         for (May may1: mays){
-            defaultTableModel.addRow(new Object[]{ may1.getIdMay(),may1.getIdKhach(),may1.getTenKhach(),may1.getBD(),may1.getDonGia()});
+            defaultTableModel_40.addRow(new Object[]{ may1.getIdMay(),may1.getIdKhach(),may1.getTenKhach(),may1.getBD(),may1.getDonGia()});
             String tm = may1.getIdMay();
             switch (tm){
                 case "May1":
@@ -102,31 +102,31 @@ public class KhachHang extends javax.swing.JPanel {
     
     public KhachHang(User user1) {
         initComponents();
-        this.user1=user1;
-        userService = new UserService();
-         defaultTableModel = new DefaultTableModel(){
+        this.user1_40=user1;
+        userService_40 = new UserService();
+         defaultTableModel_40 = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column){
                 return false;
             }
         };
-        mayTable.setModel(defaultTableModel);
+        mayTable.setModel(defaultTableModel_40);
         
-        defaultTableModel.addColumn("ID máy");
-        defaultTableModel.addColumn("ID khách");
-        defaultTableModel.addColumn("Tên khách");
-        defaultTableModel.addColumn("Thời gian bắt đầu thuê");
-        defaultTableModel.addColumn("Đơn giá thuê");
+        defaultTableModel_40.addColumn("ID máy");
+        defaultTableModel_40.addColumn("ID khách");
+        defaultTableModel_40.addColumn("Tên khách");
+        defaultTableModel_40.addColumn("Thời gian bắt đầu thuê");
+        defaultTableModel_40.addColumn("Đơn giá thuê");
         
         jComboBox2.removeAllItems();
-        List<May> mayss = userService.getAllMay();
+        List<May> mayss = userService_40.getAllMay();
         for (May may: mayss){
             jComboBox1.removeItem(String.valueOf(may.getIdMay()));
         }
             jComboBox2.addItem(String.valueOf(user1.getId()));
-        defaultTableModel.setRowCount(0);
-        List<May> mays = userService.getAllMayByIdKH(user1.getId());
-        List<May> mays1 = userService.getAllMay();
+        defaultTableModel_40.setRowCount(0);
+        List<May> mays = userService_40.getAllMayByIdKH(user1.getId());
+        List<May> mays1 = userService_40.getAllMay();
         for (May may1: mays1){
             String tm = may1.getIdMay();
             switch (tm){
@@ -162,7 +162,7 @@ public class KhachHang extends javax.swing.JPanel {
             }
         }
         for (May may1: mays){
-            defaultTableModel.addRow(new Object[]{ may1.getIdMay(),may1.getIdKhach(),may1.getTenKhach(),may1.getBD(),may1.getDonGia()});
+            defaultTableModel_40.addRow(new Object[]{ may1.getIdMay(),may1.getIdKhach(),may1.getTenKhach(),may1.getBD(),may1.getDonGia()});
         }
     }
 
@@ -402,12 +402,12 @@ public class KhachHang extends javax.swing.JPanel {
               
         may.setBD(formatted);
         may.setDonGia(5000);
-        userService.addMay(may);
+        userService_40.addMay(may);
         String nameBT= String.valueOf(jComboBox2.getSelectedItem()).replaceAll(" ","");
-        defaultTableModel.setRowCount(0);
-        List<May> mays = userService.getAllMay();
+        defaultTableModel_40.setRowCount(0);
+        List<May> mays = userService_40.getAllMay();
         for (May may1: mays){
-            defaultTableModel.addRow(new Object[]{ may1.getIdMay(),may1.getIdKhach(),may1.getTenKhach(),may1.getBD(),may1.getDonGia()});
+            defaultTableModel_40.addRow(new Object[]{ may1.getIdMay(),may1.getIdKhach(),may1.getTenKhach(),may1.getBD(),may1.getDonGia()});
             String tm = may1.getIdMay();
             switch (tm){
                 case "May1":
@@ -455,14 +455,14 @@ public class KhachHang extends javax.swing.JPanel {
             if (confirm==JOptionPane.YES_OPTION){
                 String userId= String.valueOf(mayTable.getValueAt(row,0));
 
-                userService.deleteMay(userId);
+                userService_40.deleteMay(userId);
                 jComboBox1.removeAllItems();
             for (int i = 1;i<=9;i++)
             {
                 jComboBox1.addItem("May"+i);
             }
 
-            List<May> mayss = userService.getAllMay();
+            List<May> mayss = userService_40.getAllMay();
             for (May may: mayss){
                 jComboBox1.removeItem(String.valueOf(may.getIdMay()));
             }
@@ -502,10 +502,10 @@ public class KhachHang extends javax.swing.JPanel {
                     break;
             }
                 
-        defaultTableModel.setRowCount(0);
-        List<May> mays = userService.getAllMay();
+        defaultTableModel_40.setRowCount(0);
+        List<May> mays = userService_40.getAllMay();
         for (May may1: mays){
-            defaultTableModel.addRow(new Object[]{ may1.getIdMay(),may1.getIdKhach(),may1.getTenKhach(),may1.getBD(),may1.getDonGia()});
+            defaultTableModel_40.addRow(new Object[]{ may1.getIdMay(),may1.getIdKhach(),may1.getTenKhach(),may1.getBD(),may1.getDonGia()});
         }
         }}
         
@@ -514,7 +514,7 @@ public class KhachHang extends javax.swing.JPanel {
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
         User user2 = new User();
-        user2 = userService.getUserById(Integer.valueOf(String.valueOf(jComboBox2.getSelectedItem())));
+        user2 = userService_40.getUserById(Integer.valueOf(String.valueOf(jComboBox2.getSelectedItem())));
         jLabel4.setText(user2.getTen());
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
