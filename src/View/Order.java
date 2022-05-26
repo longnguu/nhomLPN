@@ -4,6 +4,15 @@
  */
 package View;
 
+import User.DoanhThu;
+import User.ThucPham;
+import User.User;
+import UserService.UserService;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author phien
@@ -13,8 +22,27 @@ public class Order extends javax.swing.JFrame {
     /**
      * Creates new form Order
      */
+    UserService userService_46;
+    User user_46;
+    ThucPham tp_46;
+    DefaultTableModel defaultTableModel_46;
     public Order() {
         initComponents();
+        userService_46 = new UserService();
+        List<ThucPham> tps = userService_46.getAllTP();
+        for (ThucPham tp:tps){
+            jComboBox1_46.addItem(String.valueOf(tp.getTen()));
+        }
+    }
+    public Order(User user){
+        initComponents();
+        this.user_46=user;
+        userService_46 = new UserService();
+       jLabel1_46.setText("ID khách hàng: "+ user.getId()+" Tên KH: "+user.getTen());
+        List<ThucPham> tps = userService_46.getAllTP();
+        for (ThucPham tp:tps){
+            jComboBox1_46.addItem(String.valueOf(tp.getTen()));
+        }
     }
 
     /**
@@ -41,7 +69,11 @@ public class Order extends javax.swing.JFrame {
         getContentPane().add(jLabel1_46, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 340, 30));
 
         jComboBox1_46.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        jComboBox1_46.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Coca", "Pepsi", "Redbull" }));
+        jComboBox1_46.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1_46ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jComboBox1_46, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 320, 130, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
@@ -49,10 +81,16 @@ public class Order extends javax.swing.JFrame {
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 210, 30));
 
         jSpinner1_46.setFont(new java.awt.Font("Segoe UI Black", 1, 20)); // NOI18N
+        jSpinner1_46.setModel(new javax.swing.SpinnerNumberModel(1, null, null, 1));
         getContentPane().add(jSpinner1_46, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 340, -1, -1));
 
         jButton1_46.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jButton1_46.setText("Order");
+        jButton1_46.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1_46ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1_46, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 450, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Order.png"))); // NOI18N
@@ -60,6 +98,34 @@ public class Order extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboBox1_46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1_46ActionPerformed
+        // TODO add your handling code here:
+        ThucPham tp = new ThucPham();
+        List<ThucPham> tps=userService_46.searchTP1(String.valueOf(jComboBox1_46.getSelectedItem()));
+        for (ThucPham tp1:tps){
+            jLabel2.setText(String.valueOf(tp1.getGia()+2000));
+        }
+    }//GEN-LAST:event_jComboBox1_46ActionPerformed
+
+    private void jButton1_46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1_46ActionPerformed
+        // TODO add your handling code here:
+        DoanhThu dt= new DoanhThu();
+        LocalDateTime current = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formatted = current.format(formatter);
+        dt.setNgay(formatted);
+        dt.setDoanhThu(Long.valueOf(jLabel2.getText())*Integer.valueOf(String.valueOf(jSpinner1_46.getValue())));
+        dt.setGhiChu("Khach dat mua");
+        user_46.setTienNo(user_46.getTienNo()-Long.valueOf(jLabel2.getText())*Integer.valueOf(String.valueOf(jSpinner1_46.getValue())));
+        List<ThucPham> tp1 = userService_46.searchTP1(String.valueOf(jComboBox1_46.getSelectedItem()));
+        ThucPham tp= tp1.get(0);
+        tp.setSoLuong(tp.getSoLuong()-Integer.valueOf(String.valueOf(jSpinner1_46.getValue())));
+        userService_46.updateTP(tp);
+        userService_46.updateUser(user_46);
+        userService_46.addDT(dt);
+        this.dispose();
+    }//GEN-LAST:event_jButton1_46ActionPerformed
 
     /**
      * @param args the command line arguments
