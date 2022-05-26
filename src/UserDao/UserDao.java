@@ -467,4 +467,71 @@ public class UserDao {
         }
         return dts;
     }
+    public List<ThucPham> getAllTP() throws SQLException{
+        List<ThucPham> users = new ArrayList<>();
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql= "SELECT * FROM thucpham";
+        User user=new User();
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                ThucPham tp = new ThucPham();
+                
+                tp.setId(rs.getInt("id"));
+                tp.setSoLuong(rs.getInt("soluong"));
+                tp.setGia(rs.getLong("Gia"));
+                tp.setTen(rs.getString("Ten"));
+                 
+                
+                users.add(tp);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return users;
+    }
+    public List<ThucPham> searchTP1(String s) throws SQLException{
+        List<ThucPham> users = new ArrayList<>();
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql= "SELECT * FROM ThucPham where ten =  ?";
+        
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,s);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                ThucPham tp = new ThucPham();
+                
+                tp.setId(rs.getInt("id"));
+                tp.setSoLuong(rs.getInt("soluong"));
+                tp.setGia(rs.getLong("Gia"));
+                tp.setTen(rs.getString("Ten"));
+                 
+                
+                users.add(tp);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return users;
+    }
+    public void updateTP(ThucPham tp){
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql="UPDATE thucpham SET ten= ?,soluong= ?,gia= ? WHERE id= ?";
+        
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            
+            preparedStatement.setString(1,tp.getTen());
+            preparedStatement.setInt(2,tp.getSoLuong());
+            preparedStatement.setLong(3,tp.getGia());
+            preparedStatement.setInt(4,tp.getId());
+            
+            
+            int rs= preparedStatement.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 }

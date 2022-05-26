@@ -112,4 +112,23 @@ public class UserService {
         }
         return null;
     }
+    public List<ThucPham> getAllTP(){
+        try {
+            return userDao.getAllTP();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public List<ThucPham> searchTP1(String s){
+        try {
+            return userDao.searchTP1(s);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public void updateTP(ThucPham user){
+        userDao.updateTP(user);
+    }
 }
