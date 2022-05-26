@@ -48,24 +48,8 @@ public class Home extends javax.swing.JFrame {
         hstTF.setText("1");
         userService_22 = new UserService();
         jTabbedPane1.removeAll();
+        khachHangPN_22= new KhachHang(user1);
         jTabbedPane1.addTab("Khách hàng", khachHangPN_22);
-        
-        
-        defaultTableModel_22 = new DefaultTableModel(){
-            @Override
-            public boolean isCellEditable(int row, int column){
-                return false;
-            }
-        };
-        userTable.setModel(defaultTableModel_22);
-        
-        defaultTableModel_22.addColumn("ID");
-        defaultTableModel_22.addColumn("Tên");
-        defaultTableModel_22.addColumn("Số tiền");
-        defaultTableModel_22.addColumn("Tài khoản");
-        defaultTableModel_22.addColumn("Quyền");
-        
-        setTable();
     }
 
     /**
