@@ -132,6 +132,12 @@ public class Home extends javax.swing.JFrame {
 
         jTabbedPane1.setName(""); // NOI18N
 
+        searchTF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchTFKeyReleased(evt);
+            }
+        });
+
         jButton1.setText("Tìm kiếm");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -573,6 +579,8 @@ public class Home extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:'
+        this.dispose();
+        new Login().setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -604,6 +612,15 @@ public class Home extends javax.swing.JFrame {
         new PhieuNhapThucPham().setVisible(true);
         //this.dispose();
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void searchTFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTFKeyReleased
+        // TODO add your handling code here:
+        defaultTableModel_22.setRowCount(0);
+        List<User> users = userService_22.searchUser(searchTF.getText());
+        for (User user: users){
+            defaultTableModel_22.addRow(new Object[]{ user.getId(),user.getTen(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
+        }
+    }//GEN-LAST:event_searchTFKeyReleased
 
     /**
      * @param args the command line arguments
