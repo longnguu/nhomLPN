@@ -76,6 +76,10 @@ public class KhachHangView extends javax.swing.JFrame implements ActionListener{
             button[i].addActionListener(this);
             jComboBox1.addItem(String.valueOf(pc.getIdPC()));
         }
+        List<May> mayss = userService_40.getAllMay();
+        for (May may: mayss){
+            jComboBox1.removeItem(String.valueOf(may.getIdMay()));
+        }
         defaultTableModel_40.setRowCount(0);
         List<May> mays = userService_40.getAllMayByIdKH(user1.getId());
         List<May> mays1 = userService_40.getAllMay();
@@ -356,7 +360,7 @@ public class KhachHangView extends javax.swing.JFrame implements ActionListener{
         userService_40.addMay(may);
         String nameBT= String.valueOf(user_40.getId()).replaceAll(" ","");
         defaultTableModel_40.setRowCount(0);
-        List<May> mays = userService_40.getAllMay();
+        List<May> mays = userService_40.getAllMayByIdKH(user_40.getId());
         for (May may1: mays){
             defaultTableModel_40.addRow(new Object[]{ may1.getIdMay(),may1.getIdKhach(),may1.getTenKhach(),may1.getBD(),may1.getDonGia()});
             String tm = may1.getIdMay();
@@ -366,6 +370,9 @@ public class KhachHangView extends javax.swing.JFrame implements ActionListener{
             }
         }
         jComboBox1.removeItem(jComboBox1.getSelectedItem());
+        User user1 = new User();
+        user1=userService_40.getUserById(user_40.getId());
+        jLabel4.setText("ID: "+user1.getId()+" Họ và tên: "+user1.getTen()+" Số dư tài khoản: "+user1.getTienNo());
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -409,12 +416,14 @@ public class KhachHangView extends javax.swing.JFrame implements ActionListener{
             }
 
                 defaultTableModel_40.setRowCount(0);
-                List<May> mays = userService_40.getAllMay();
+                List<May> mays = userService_40.getAllMayByIdKH(user_40.getId());
                 for (May may1: mays){
                     defaultTableModel_40.addRow(new Object[]{ may1.getIdMay(),may1.getIdKhach(),may1.getTenKhach(),may1.getBD(),may1.getDonGia()});
                 }
             }}
-
+            User user1 = new User();
+            user1=userService_40.getUserById(user_40.getId());
+            jLabel4.setText("ID: "+user1.getId()+" Họ và tên: "+user1.getTen()+" Số dư tài khoản: "+user1.getTienNo());
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -428,38 +437,38 @@ public class KhachHangView extends javax.swing.JFrame implements ActionListener{
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(KhachHangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(KhachHangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(KhachHangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(KhachHangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new KhachHangView().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(KhachHangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(KhachHangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(KhachHangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(KhachHangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new KhachHangView().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton May1;

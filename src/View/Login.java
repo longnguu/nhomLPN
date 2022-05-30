@@ -99,6 +99,7 @@ public class Login extends javax.swing.JFrame {
                         this.dispose();
                    }else{
                         new KhachHangView(user_46).setVisible(true);
+                        this.dispose();
                     }
             }}
     }//GEN-LAST:event_jButton1_46ActionPerformed
