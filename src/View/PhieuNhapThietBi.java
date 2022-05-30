@@ -53,7 +53,7 @@ public class PhieuNhapThietBi extends javax.swing.JFrame {
         searchTF26 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(51, 102, 255));
 
@@ -257,6 +257,7 @@ public class PhieuNhapThietBi extends javax.swing.JFrame {
         PC pc = new PC();
         pc.setIdPC(idTF26.getText());
         pc.setTenPC(tenTF.getText());
+        pc.setTthai("bt");
         thietBiService.addPC(pc);
         model.setRowCount(0);
         List<PC> pcs = new ArrayList<>();

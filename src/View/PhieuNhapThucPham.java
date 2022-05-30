@@ -56,7 +56,7 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
         jScrollPane1_26 = new javax.swing.JScrollPane();
         tableTP26 = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1_26.setBackground(new java.awt.Color(51, 153, 255));
 

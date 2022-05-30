@@ -13,11 +13,16 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import static java.lang.Thread.sleep;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -37,10 +42,11 @@ public class KhachHangView extends javax.swing.JFrame implements ActionListener{
     User user_40,user1_40;
     DefaultTableModel defaultTableModel_40,defaultTableModel1_40,defaultTableModel2_40;
     JButton button[]= new JButton[100];
+    int kt=0,kt1=0;
     public KhachHangView() {
         initComponents();
     }
-    public KhachHangView(User user1) {
+    public KhachHangView(User user1) throws FileNotFoundException, IOException{
         initComponents();
         jLabel4.setText("ID: "+user1.getId()+" Họ và tên: "+user1.getTen()+" Số dư tài khoản: "+user1.getTienNo());
         this.user_40=user1;
@@ -59,6 +65,25 @@ public class KhachHangView extends javax.swing.JFrame implements ActionListener{
         defaultTableModel_40.addColumn("Thời gian bắt đầu thuê");
         defaultTableModel_40.addColumn("Đơn giá thuê");
         
+        setTBDF();
+        kt=userService_40.demMay();
+        new Thread()
+        {
+            public void run()
+            {
+                while (true)
+                {   
+                    if (kt1==1){
+                        kt1=0;
+                        setTBDF();
+                    }
+                    Update();
+                }
+            }
+        }.start();
+    }
+    public void setTBDF(){
+        
         jComboBox1.removeAllItems();
         List<PC> pcs = userService_40.getAllPC();
         int i=0;
@@ -66,6 +91,7 @@ public class KhachHangView extends javax.swing.JFrame implements ActionListener{
         for (PC pc: pcs){
             i++;
             button[i] = new JButton(pc.getIdPC());
+            button[i].setBackground(new Color(240,240,240));
             try {
                 Image img = ImageIO.read(getClass().getResource("../IMG/computer.png"));
                 button[i].setIcon(new ImageIcon(img));
@@ -76,25 +102,26 @@ public class KhachHangView extends javax.swing.JFrame implements ActionListener{
             button[i].addActionListener(this);
             jComboBox1.addItem(String.valueOf(pc.getIdPC()));
         }
+        
         List<May> mayss = userService_40.getAllMay();
         for (May may: mayss){
             jComboBox1.removeItem(String.valueOf(may.getIdMay()));
         }
         defaultTableModel_40.setRowCount(0);
-        List<May> mays = userService_40.getAllMayByIdKH(user1.getId());
-        List<May> mays1 = userService_40.getAllMay();
-        for (May may1: mays1){
+        List<May> mays = userService_40.getAllMay();
+        for (May may1: mays){
             String tm = may1.getIdMay();
             for (int j=1;j<= userService_40.demPC();j++){
                 if (button[j].getText().equals(tm))
                         button[j].setBackground(Color.red);
             }
         }
+        mays= userService_40.getAllMayByIdKH(user_40.getId());
         for (May may1: mays){
-            defaultTableModel_40.addRow(new Object[]{ may1.getIdMay(),may1.getIdKhach(),may1.getTenKhach(),may1.getBD(),may1.getDonGia()});
+        defaultTableModel_40.addRow(new Object[]{ may1.getIdMay(),may1.getIdKhach(),may1.getTenKhach(),may1.getBD(),may1.getDonGia()});
+        
         }
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -236,11 +263,11 @@ public class KhachHangView extends javax.swing.JFrame implements ActionListener{
                         .addGap(0, 372, Short.MAX_VALUE))
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3)
-                .addGap(24, 24, 24))
+                .addGap(104, 104, 104))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -388,18 +415,18 @@ public class KhachHangView extends javax.swing.JFrame implements ActionListener{
         may.setBD(formatted);
         may.setDonGia(5000);
         userService_40.addMay(may);
-        String nameBT= String.valueOf(user_40.getId()).replaceAll(" ","");
-        defaultTableModel_40.setRowCount(0);
-        List<May> mays = userService_40.getAllMayByIdKH(user_40.getId());
-        for (May may1: mays){
-            defaultTableModel_40.addRow(new Object[]{ may1.getIdMay(),may1.getIdKhach(),may1.getTenKhach(),may1.getBD(),may1.getDonGia()});
-            String tm = may1.getIdMay();
-            for (int j=1;j<= userService_40.demPC();j++){
-                if (button[j].getText().equals(tm))
-                        button[j].setBackground(Color.red);
-            }
-        }
-        jComboBox1.removeItem(jComboBox1.getSelectedItem());
+//        String nameBT= String.valueOf(user_40.getId()).replaceAll(" ","");
+//        defaultTableModel_40.setRowCount(0);
+//        List<May> mays = userService_40.getAllMayByIdKH(user_40.getId());
+//        for (May may1: mays){
+//            defaultTableModel_40.addRow(new Object[]{ may1.getIdMay(),may1.getIdKhach(),may1.getTenKhach(),may1.getBD(),may1.getDonGia()});
+//            String tm = may1.getIdMay();
+//            for (int j=1;j<= userService_40.demPC();j++){
+//                if (button[j].getText().equals(tm))
+//                        button[j].setBackground(Color.red);
+//            }
+//        }
+//        jComboBox1.removeItem(jComboBox1.getSelectedItem());
         User user1 = new User();
         user1=userService_40.getUserById(user_40.getId());
         jLabel4.setText("ID: "+user1.getId()+" Họ và tên: "+user1.getTen()+" Số dư tài khoản: "+user1.getTienNo());
@@ -426,30 +453,30 @@ public class KhachHangView extends javax.swing.JFrame implements ActionListener{
                 String tm= String.valueOf(mayTable.getValueAt(row,0));
 
                 userService_40.deleteMay(tm);
-                jComboBox1.removeAllItems();
-                for (int i = 1;i<=9;i++)
-                {
-                    jComboBox1.addItem("May"+i);
-                }
-
-                List<May> mayss = userService_40.getAllMay();
-                for (May may: mayss){
-                    jComboBox1.removeItem(String.valueOf(may.getIdMay()));
-                }
-                LocalDateTime current = LocalDateTime.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                String formatted = current.format(formatter);
-
-                for (int j=1;j<= userService_40.demPC();j++){
-                if (button[j].getText().equals(tm))
-                        button[j].setBackground(new Color(240,240,240));
-            }
-
-                defaultTableModel_40.setRowCount(0);
-                List<May> mays = userService_40.getAllMayByIdKH(user_40.getId());
-                for (May may1: mays){
-                    defaultTableModel_40.addRow(new Object[]{ may1.getIdMay(),may1.getIdKhach(),may1.getTenKhach(),may1.getBD(),may1.getDonGia()});
-                }
+//                jComboBox1.removeAllItems();
+//                for (int i = 1;i<=9;i++)
+//                {
+//                    jComboBox1.addItem("May"+i);
+//                }
+//
+//                List<May> mayss = userService_40.getAllMay();
+//                for (May may: mayss){
+//                    jComboBox1.removeItem(String.valueOf(may.getIdMay()));
+//                }
+//                LocalDateTime current = LocalDateTime.now();
+//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//                String formatted = current.format(formatter);
+//
+//                for (int j=1;j<= userService_40.demPC();j++){
+//                if (button[j].getText().equals(tm))
+//                        button[j].setBackground(new Color(240,240,240));
+//            }
+//
+//                defaultTableModel_40.setRowCount(0);
+//                List<May> mays = userService_40.getAllMayByIdKH(user_40.getId());
+//                for (May may1: mays){
+//                    defaultTableModel_40.addRow(new Object[]{ may1.getIdMay(),may1.getIdKhach(),may1.getTenKhach(),may1.getBD(),may1.getDonGia()});
+//                }
             }}
             User user1 = new User();
             user1=userService_40.getUserById(user_40.getId());
@@ -471,47 +498,43 @@ public class KhachHangView extends javax.swing.JFrame implements ActionListener{
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        new KhachHangView(user_40).setVisible(true);
-        this.dispose();
+        setTBDF();
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(KhachHangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(KhachHangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(KhachHangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(KhachHangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new KhachHangView().setVisible(true);
-//            }
-//        });
-//    }
-
+public void Update()
+    {
+        try {
+            sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(KhachHangView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (kt!=userService_40.demMay()) 
+        {
+            
+            kt1=1;
+            kt=userService_40.demMay();
+        }
+    }
+    
+    public static void Set_Look_And_Feel()
+    {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(KhachHangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(KhachHangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(KhachHangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(KhachHangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }     
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton May1;
     private javax.swing.JButton May2;

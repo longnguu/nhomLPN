@@ -12,11 +12,16 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import static java.lang.Thread.sleep;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -37,7 +42,8 @@ public class KhachHang extends javax.swing.JPanel implements ActionListener {
     User user_40,user1_40;
     DefaultTableModel defaultTableModel_40,defaultTableModel1_40,defaultTableModel2_40;
     JButton button[]= new JButton[100];
-    public KhachHang() {
+    int kt=0,kt1=0,kt2=0;
+    public KhachHang() throws FileNotFoundException, IOException{
         initComponents();
         userService_40 = new Service();
          defaultTableModel_40 = new DefaultTableModel(){
@@ -53,8 +59,32 @@ public class KhachHang extends javax.swing.JPanel implements ActionListener {
         defaultTableModel_40.addColumn("Tên khách");
         defaultTableModel_40.addColumn("Thời gian bắt đầu thuê");
         defaultTableModel_40.addColumn("Đơn giá thuê");
-        
         jComboBox2.removeAllItems();
+        List<User> users = userService_40.getAllUser();
+        for (User user: users){
+            jComboBox2.addItem(String.valueOf(user.getId()));
+        }
+        setTBDF();
+        
+        kt=userService_40.demMay();
+        kt2=userService_40.demPC();
+        new Thread()
+        {
+            public void run()
+            {
+                while (true)
+                {   
+                    if (kt1==1){
+                        kt1=0;
+                        setTBDF();
+                    }
+                    Update();
+                }
+            }
+        }.start();
+    }
+    public void setTBDF(){
+        
         jComboBox1.removeAllItems();
         List<PC> pcs = userService_40.getAllPC();
         int i=0;
@@ -62,6 +92,7 @@ public class KhachHang extends javax.swing.JPanel implements ActionListener {
         for (PC pc: pcs){
             i++;
             button[i] = new JButton(pc.getIdPC());
+            button[i].setBackground(new Color(240,240,240));
             try {
                 Image img = ImageIO.read(getClass().getResource("../IMG/computer.png"));
                 button[i].setIcon(new ImageIcon(img));
@@ -77,10 +108,6 @@ public class KhachHang extends javax.swing.JPanel implements ActionListener {
         for (May may: mayss){
             jComboBox1.removeItem(String.valueOf(may.getIdMay()));
         }
-        List<User> users = userService_40.getAllUser();
-        for (User user: users){
-            jComboBox2.addItem(String.valueOf(user.getId()));
-        }
         defaultTableModel_40.setRowCount(0);
         List<May> mays = userService_40.getAllMay();
         for (May may1: mays){
@@ -91,48 +118,7 @@ public class KhachHang extends javax.swing.JPanel implements ActionListener {
                         button[j].setBackground(Color.red);
             }
         }
-        
     }
-    
-    public KhachHang(User user1) {
-        initComponents();
-        this.user1_40=user1;
-        userService_40 = new Service();
-         defaultTableModel_40 = new DefaultTableModel(){
-            @Override
-            public boolean isCellEditable(int row, int column){
-                return false;
-            }
-        };
-        mayTable.setModel(defaultTableModel_40);
-        
-        defaultTableModel_40.addColumn("ID máy");
-        defaultTableModel_40.addColumn("ID khách");
-        defaultTableModel_40.addColumn("Tên khách");
-        defaultTableModel_40.addColumn("Thời gian bắt đầu thuê");
-        defaultTableModel_40.addColumn("Đơn giá thuê");
-        
-        jComboBox2.removeAllItems();
-        List<May> mayss = userService_40.getAllMay();
-        for (May may: mayss){
-            jComboBox1.removeItem(String.valueOf(may.getIdMay()));
-        }
-            jComboBox2.addItem(String.valueOf(user1.getId()));
-        defaultTableModel_40.setRowCount(0);
-        List<May> mays = userService_40.getAllMayByIdKH(user1.getId());
-        List<May> mays1 = userService_40.getAllMay();
-        for (May may1: mays1){
-            String tm = may1.getIdMay();
-            for (int j=1;j<= userService_40.demPC();j++){
-                if (button[j].getText().equals(tm))
-                        button[j].setBackground(Color.red);
-            }
-        }
-        for (May may1: mays){
-            defaultTableModel_40.addRow(new Object[]{ may1.getIdMay(),may1.getIdKhach(),may1.getTenKhach(),may1.getBD(),may1.getDonGia()});
-        }
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -360,18 +346,18 @@ public class KhachHang extends javax.swing.JPanel implements ActionListener {
         may.setBD(formatted);
         may.setDonGia(5000);
         userService_40.addMay(may);
-        String nameBT= String.valueOf(jComboBox2.getSelectedItem()).replaceAll(" ","");
-        defaultTableModel_40.setRowCount(0);
-        List<May> mays = userService_40.getAllMay();
-        for (May may1: mays){
-            defaultTableModel_40.addRow(new Object[]{ may1.getIdMay(),may1.getIdKhach(),may1.getTenKhach(),may1.getBD(),may1.getDonGia()});
-            String tm = may1.getIdMay();
-            for (int j=1;j<= userService_40.demPC();j++){
-                if (button[j].getText().equals(tm))
-                        button[j].setBackground(Color.red);
-            }
-        }
-        jComboBox1.removeItem(jComboBox1.getSelectedItem());
+//        String nameBT= String.valueOf(jComboBox2.getSelectedItem()).replaceAll(" ","");
+//        defaultTableModel_40.setRowCount(0);
+//        List<May> mays = userService_40.getAllMay();
+//        for (May may1: mays){
+//            defaultTableModel_40.addRow(new Object[]{ may1.getIdMay(),may1.getIdKhach(),may1.getTenKhach(),may1.getBD(),may1.getDonGia()});
+//            String tm = may1.getIdMay();
+//            for (int j=1;j<= userService_40.demPC();j++){
+//                if (button[j].getText().equals(tm))
+//                        button[j].setBackground(Color.red);
+//            }
+//        }
+//        jComboBox1.removeItem(jComboBox1.getSelectedItem());
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -386,31 +372,32 @@ public class KhachHang extends javax.swing.JPanel implements ActionListener {
                 String userId= String.valueOf(mayTable.getValueAt(row,0));
 
                 userService_40.deleteMay(userId);
-                jComboBox1.removeAllItems();
-            for (int i = 1;i<=9;i++)
-            {
-                jComboBox1.addItem("May"+i);
-            }
-
-            List<May> mayss = userService_40.getAllMay();
-            for (May may: mayss){
-                jComboBox1.removeItem(String.valueOf(may.getIdMay()));
-            }
-                LocalDateTime current = LocalDateTime.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                String formatted = current.format(formatter); 
-                
-            for (int j=1;j<= userService_40.demPC();j++){
-                if (button[j].getText().equals(userId))
-                        button[j].setBackground(new Color(240,240,240));
-            }
-                
-        defaultTableModel_40.setRowCount(0);
-        List<May> mays = userService_40.getAllMay();
-        for (May may1: mays){
-            defaultTableModel_40.addRow(new Object[]{ may1.getIdMay(),may1.getIdKhach(),may1.getTenKhach(),may1.getBD(),may1.getDonGia()});
+//            jComboBox1.removeAllItems();
+//            List<PC> pcs = userService_40.getAllPC();
+//            for (PC pc: pcs){
+//                jComboBox1.addItem(String.valueOf(pc.getIdPC()));
+//            }
+//
+//            List<May> mayss = userService_40.getAllMay();
+//            for (May may: mayss){
+//                jComboBox1.removeItem(String.valueOf(may.getIdMay()));
+//            }
+//                LocalDateTime current = LocalDateTime.now();
+//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//                String formatted = current.format(formatter); 
+//                
+//            for (int j=1;j<= userService_40.demPC();j++){
+//                if (button[j].getText().equals(userId))
+//                        button[j].setBackground(new Color(240,240,240));
+//            }
+//                
+//        defaultTableModel_40.setRowCount(0);
+//        List<May> mays = userService_40.getAllMay();
+//        for (May may1: mays){
+//            defaultTableModel_40.addRow(new Object[]{ may1.getIdMay(),may1.getIdKhach(),may1.getTenKhach(),may1.getBD(),may1.getDonGia()});
+//        }
         }
-        }}
+        }
         
     }//GEN-LAST:event_jButton11ActionPerformed
 
@@ -420,7 +407,44 @@ public class KhachHang extends javax.swing.JPanel implements ActionListener {
         user2 = userService_40.getUserById(Integer.valueOf(String.valueOf(jComboBox2.getSelectedItem())));
         jLabel4.setText("Tên: " +user2.getTen()+" Số dư: "+user2.getTienNo());
     }//GEN-LAST:event_jComboBox2ActionPerformed
-
+public void Update()
+    {
+        try {
+            sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(KhachHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (kt!=userService_40.demMay()) 
+        {
+            
+            kt1=1;
+            kt=userService_40.demMay();
+        }
+        if (kt2!=userService_40.demPC()){
+            kt1=1;
+            kt2=userService_40.demPC();
+        }
+    }
+    
+    public static void Set_Look_And_Feel()
+    {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(KhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(KhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(KhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(KhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }     
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton May1;

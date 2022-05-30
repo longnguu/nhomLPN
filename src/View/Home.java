@@ -18,7 +18,7 @@ public class Home extends javax.swing.JFrame {
     User user_22;
     DefaultTableModel defaultTableModel_22,defaultTableModel1_22,defaultTableModel2_22;
     KhachHang khachHangPN_22;
-    int kt=0;
+    int kt=0,kt1=0,kt2=0,kt3=0;
     public Home() throws FileNotFoundException, IOException{
         initComponents();
         hstTF.setText("1");
@@ -47,12 +47,19 @@ public class Home extends javax.swing.JFrame {
         
         setTable();
         kt=userService_22.demTB();
+        kt2=userService_22.demMay();
+        kt3=userService_22.demPC();
         new Thread()
         {
             public void run()
             {
                 while (true)
                 {   
+                    if (kt1==1){
+                        jLabel14.setText(String.valueOf(userService_22.demUser()));
+                        jLabel16.setText(String.valueOf(userService_22.demPC()-userService_22.demMay()+" / "+userService_22.demPC()));
+                        kt1=0;
+                    }
                     Update();
                 }
             }
@@ -64,14 +71,7 @@ public class Home extends javax.swing.JFrame {
         for (User user: users){
             defaultTableModel_22.addRow(new Object[]{ user.getId(),user.getTen(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
         }
-    }
-    public Home(User user1) {
-        initComponents();
-        hstTF.setText("1");
-        userService_22 = new Service();
-        jTabbedPane1.removeAll();
-        khachHangPN_22= new KhachHang(user1);
-        jTabbedPane1.addTab("Khách hàng", khachHangPN_22);
+        
     }
 
     /**
@@ -94,6 +94,7 @@ public class Home extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -210,6 +211,7 @@ public class Home extends javax.swing.JFrame {
         jButton10.setBackground(new java.awt.Color(51, 255, 51));
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/add.png"))); // NOI18N
         jButton10.setText("Nhập thực phẩm");
+        jButton10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
@@ -218,6 +220,21 @@ public class Home extends javax.swing.JFrame {
 
         jButton11.setBackground(new java.awt.Color(0, 255, 204));
         jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/refresh.png"))); // NOI18N
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
+        jButton12.setBackground(new java.awt.Color(51, 255, 51));
+        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/add.png"))); // NOI18N
+        jButton12.setText("Mua thêm máy");
+        jButton12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -230,15 +247,17 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addComponent(jButton10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton14)
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton14)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,9 +266,12 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButton10)
-                                .addComponent(jButton14))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jButton10)
+                                    .addComponent(jButton14))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton12))
                             .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -833,6 +855,18 @@ public class Home extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+        jLabel14.setText(String.valueOf(userService_22.demUser()));
+        jLabel16.setText(String.valueOf(userService_22.demPC()-userService_22.demMay()+" / "+userService_22.demPC()));
+        
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // TODO add your handling code here:
+        new PhieuNhapThietBi().setVisible(true);
+    }//GEN-LAST:event_jButton12ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -883,7 +917,14 @@ public class Home extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(Home.this,"Ban co 1 thong bao moi","Thong bao",JOptionPane.INFORMATION_MESSAGE);
             kt=userService_22.demTB();
         }
-        if (kt!=userService_22.demTB()) kt=userService_22.demTB();
+        if (kt!=userService_22.demTB()) 
+        {
+            kt=userService_22.demTB();
+        }
+        if (kt2!=userService_22.demMay()) {
+            kt2=userService_22.demMay();
+            kt1=1;
+        }     
     }
     
     public static void Set_Look_And_Feel()
@@ -916,6 +957,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

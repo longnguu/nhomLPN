@@ -98,7 +98,11 @@ public class Login extends javax.swing.JFrame {
                         }
                         this.dispose();
                    }else{
-                        new KhachHangView(user_46).setVisible(true);
+                        try {
+                            new KhachHangView(user_46).setVisible(true);
+                        } catch (IOException ex) {
+                            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         this.dispose();
                     }
             }}
