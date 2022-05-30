@@ -5,9 +5,9 @@
  */
 package View;
 
-import User.DoanhThu;
-import User.ThucPham;
-import User.User;
+import Model.DoanhThu;
+import Model.ThucPham;
+import Model.User;
 import Service.Service;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;

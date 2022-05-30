@@ -4,9 +4,9 @@
  */
 package View;
 
-import User.May;
-import User.PC;
-import User.User;
+import Model.May;
+import Model.PC;
+import Model.User;
 import Service.Service;
 import java.awt.Color;
 import java.awt.Image;

@@ -4,11 +4,11 @@
  */
 package View;
 
-import User.DoanhThu;
-import User.PC;
-import User.TBao;
-import User.ThucPham;
-import User.User;
+import Model.DoanhThu;
+import Model.PC;
+import Model.TBao;
+import Model.ThucPham;
+import Model.User;
 import Service.Service;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

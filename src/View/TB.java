@@ -8,8 +8,8 @@ package View;
  *
  * @author MY LAPTOP
  */
-import User.TBao;
-import User.User;
+import Model.TBao;
+import Model.User;
 import Service.Service;
 import java.io.File;
 import java.io.FileInputStream;

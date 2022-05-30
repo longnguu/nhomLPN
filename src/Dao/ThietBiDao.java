@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package UserDao;
+package Dao;
 
-import User.PC;
+import Model.PC;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +20,29 @@ import java.util.logging.Logger;
  */
 public class ThietBiDao {
      public List<PC> getAllPC() throws SQLException{
+        List<PC> users = new ArrayList<>();
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql= "SELECT * FROM PC where tthai like '%bt%'";
+        
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                PC user = new PC();
+                
+                user.setIdPC(rs.getString("id"));
+                user.setTenPC(rs.getString("ten"));
+                user.setTthai(rs.getString("tthai"));
+                
+                
+                users.add(user);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return users;
+    }
+     public List<PC> getAllPC1() throws SQLException{
         List<PC> users = new ArrayList<>();
         Connection connection = KetNoiSQL.getJDBCConnection();
         String sql= "SELECT * FROM PC";

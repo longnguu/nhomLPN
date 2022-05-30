@@ -4,10 +4,10 @@
  */
 package View;
 
-import User.May;
-import User.PC;
-import User.TBao;
-import User.User;
+import Model.May;
+import Model.PC;
+import Model.TBao;
+import Model.User;
 import Service.Service;
 import java.awt.Color;
 import java.awt.Image;

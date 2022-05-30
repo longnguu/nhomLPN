@@ -1,14 +1,14 @@
 package Service;
 
-import User.DoanhThu;
-import User.May;
-import User.PC;
-import User.TBao;
-import User.ThucPham;
-import User.User;
-import UserDao.ThietBiDao;
-import UserDao.ThucPhamDao;
-import UserDao.UserDao;
+import Model.DoanhThu;
+import Model.May;
+import Model.PC;
+import Model.TBao;
+import Model.ThucPham;
+import Model.User;
+import Dao.ThietBiDao;
+import Dao.ThucPhamDao;
+import Dao.UserDao;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -169,6 +169,14 @@ public class Service {
     public List<PC> getAllPC(){
         try {
             return userDao.getAllPC();
+        } catch (SQLException ex) {
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public List<PC> getAllPC1() {
+        try {
+            return thietBiDao.getAllPC1();
         } catch (SQLException ex) {
             Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }

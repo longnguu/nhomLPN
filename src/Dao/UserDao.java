@@ -3,14 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package UserDao;
+package Dao;
 
-import User.DoanhThu;
-import User.May;
-import User.PC;
-import User.TBao;
-import User.ThucPham;
-import User.User;
+import Model.DoanhThu;
+import Model.May;
+import Model.PC;
+import Model.TBao;
+import Model.ThucPham;
+import Model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View;
-import User.User;
+import Model.User;
 import Service.Service;
 import java.io.IOException;
 import java.util.logging.Level;

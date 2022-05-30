@@ -1,6 +1,6 @@
 package View;
 
-import User.User;
+import Model.User;
 import Service.Service;
 import java.awt.CardLayout;
 import java.io.FileNotFoundException;

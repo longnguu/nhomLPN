@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package UserDao;
+package Dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,6 +17,7 @@ public class KetNoiSQL {
     private Connection con = null;
     public static Connection getJDBCConnection() {
     final String url = "jdbc:jtds:sqlserver://LAPTOP-NS4H03L1:1433/QuanLyTiemNet;";
+
         final String user = "sa";
         final String password="123456";
         try{

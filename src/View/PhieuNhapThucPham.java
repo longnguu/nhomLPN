@@ -1,6 +1,6 @@
 package View;
 
-import User.ThucPham;
+import Model.ThucPham;
 import Service.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +64,7 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
 
         jLabel1_26.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1_26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1_26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/food.png"))); // NOI18N
         jLabel1_26.setText("PHIẾU NHẬP THỰC PHẨM");
 
         javax.swing.GroupLayout jPanel2_26Layout = new javax.swing.GroupLayout(jPanel2_26);
@@ -94,6 +95,7 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
         jLabel5_26.setText("Số lương nhập");
 
         insertBT26.setBackground(new java.awt.Color(51, 255, 51));
+        insertBT26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/add.png"))); // NOI18N
         insertBT26.setText("Thêm");
         insertBT26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,6 +104,7 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
         });
 
         refreshBT26.setBackground(new java.awt.Color(51, 153, 255));
+        refreshBT26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/refresh.png"))); // NOI18N
         refreshBT26.setText("Tải lại");
         refreshBT26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,7 +158,7 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
                 .addGroup(jPanel3_26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5_26)
                     .addComponent(soLuongTF26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel3_26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(insertBT26)
                     .addComponent(refreshBT26))
@@ -163,6 +166,7 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
         );
 
         deleteBT26.setBackground(new java.awt.Color(255, 51, 51));
+        deleteBT26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/delete.png"))); // NOI18N
         deleteBT26.setText("Xóa");
         deleteBT26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,6 +175,7 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
         });
 
         editBT26.setBackground(new java.awt.Color(51, 255, 51));
+        editBT26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/fix.png"))); // NOI18N
         editBT26.setText("Sửa");
         editBT26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,6 +184,7 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
         });
 
         searchBT26.setBackground(new java.awt.Color(51, 153, 255));
+        searchBT26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/search.png"))); // NOI18N
         searchBT26.setText("Tìm");
         searchBT26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,9 +200,9 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(deleteBT26)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(editBT26, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(searchTF26, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                .addComponent(editBT26)
+                .addGap(6, 6, 6)
+                .addComponent(searchTF26, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchBT26)
                 .addContainerGap())
