@@ -1,9 +1,10 @@
 package View;
 
 import User.ThucPham;
-import UserService.UserService;
+import Service.Service;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -12,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PhieuNhapThucPham extends javax.swing.JFrame {
     DefaultTableModel model;
-    UserService userService;
+    Service userService;
     public PhieuNhapThucPham() {
         initComponents();
         model = new DefaultTableModel();
@@ -21,7 +22,7 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
         model.addColumn("Tên");
         model.addColumn("Giá");
         model.addColumn("Số lượng");
-        userService = new UserService();
+        userService = new Service();
         List<ThucPham> thucPhams = new ArrayList<>();
         thucPhams = userService.getAllThucPham();
         for(ThucPham tp : thucPhams)
@@ -304,13 +305,17 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
     private void deleteBT26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBT26ActionPerformed
         // TODO add your handling code here:
         int row = tableTP26.getSelectedRow();
-        int id = Integer.parseInt(String.valueOf(tableTP26.getValueAt(row, 0)));
-        userService.deleteThucPham(id);
-        model.setRowCount(0);
-        List<ThucPham> thucPhams = new ArrayList<>();
-        thucPhams = userService.getAllThucPham();
-        for(ThucPham tp : thucPhams)
-            model.addRow(new Object[]{tp.getId(),tp.getTen(),tp.getGia(),tp.getSoLuong()});
+        if(row == -1)
+            JOptionPane.showMessageDialog(rootPane, "Hãy chọn đối tượng", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        else{
+            int id = Integer.parseInt(String.valueOf(tableTP26.getValueAt(row, 0)));
+            userService.deleteThucPham(id);
+            model.setRowCount(0);
+            List<ThucPham> thucPhams = new ArrayList<>();
+            thucPhams = userService.getAllThucPham();
+            for(ThucPham tp : thucPhams)
+                model.addRow(new Object[]{tp.getId(),tp.getTen(),tp.getGia(),tp.getSoLuong()});
+        }
     }//GEN-LAST:event_deleteBT26ActionPerformed
 
     private void refreshBT26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBT26ActionPerformed
@@ -343,13 +348,17 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
     private void editBT26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBT26ActionPerformed
         // TODO add your handling code here:
         int row = tableTP26.getSelectedRow();
-        int id = Integer.parseInt(String.valueOf(tableTP26.getValueAt(row, 0)));
-        ThucPham tp = new ThucPham();
-        tp = userService.getThucPhamById(id);
-        idTF26.setText(String.valueOf(tp.getId()));
-        tenTF26.setText(String.valueOf(tp.getTen()));
-        giaTF26.setText(String.valueOf(tp.getGia()));
-        soLuongTF26.setText(String.valueOf(tp.getSoLuong()));
+        if(row == -1)
+            JOptionPane.showMessageDialog(rootPane, "Hãy chọn đối tượng", "Lỗi", JOptionPane.INFORMATION_MESSAGE);
+        else{
+            int id = Integer.parseInt(String.valueOf(tableTP26.getValueAt(row, 0)));
+            ThucPham tp = new ThucPham();
+            tp = userService.getThucPhamById(id);
+            idTF26.setText(String.valueOf(tp.getId()));
+            tenTF26.setText(String.valueOf(tp.getTen()));
+            giaTF26.setText(String.valueOf(tp.getGia()));
+            soLuongTF26.setText(String.valueOf(tp.getSoLuong()));
+        }
     }//GEN-LAST:event_editBT26ActionPerformed
 
     /**

@@ -10,7 +10,7 @@ package View;
  */
 import User.TBao;
 import User.User;
-import UserService.UserService;
+import Service.Service;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -27,12 +27,12 @@ public class TB extends javax.swing.JPanel {
     /**
      * Creates new form TB
      */
-    UserService userService_22;
+    Service userService_22;
     DefaultTableModel defaultTableModel_22;
     int kt=0;
     public TB()throws FileNotFoundException, IOException{
         initComponents();
-        userService_22 = new UserService();
+        userService_22 = new Service();
         setDF();
         new Thread()
         {

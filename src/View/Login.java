@@ -4,7 +4,7 @@
  */
 package View;
 import User.User;
-import UserService.UserService;
+import Service.Service;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +18,7 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    UserService userService_46;
+    Service userService_46;
     User user_46;
     public Login() {
         initComponents();
@@ -74,7 +74,7 @@ public class Login extends javax.swing.JFrame {
         String userName= tkTF_46.getText().replaceAll(" ","");
         String password= String.valueOf(mkTF_46.getPassword());
             
-        userService_46=new UserService();
+        userService_46=new Service();
         user_46=userService_46.getUserByUserName(userName);
             
             if (this.user_46 == null)

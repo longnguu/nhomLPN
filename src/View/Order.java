@@ -7,7 +7,7 @@ package View;
 import User.DoanhThu;
 import User.ThucPham;
 import User.User;
-import UserService.UserService;
+import Service.Service;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -22,13 +22,13 @@ public class Order extends javax.swing.JFrame {
     /**
      * Creates new form Order
      */
-    UserService userService_46;
+    Service userService_46;
     User user_46;
     ThucPham tp_46;
     DefaultTableModel defaultTableModel_46;
     public Order() {
         initComponents();
-        userService_46 = new UserService();
+        userService_46 = new Service();
         List<ThucPham> tps = userService_46.getAllTP();
         for (ThucPham tp:tps){
             jComboBox1_46.addItem(String.valueOf(tp.getTen()));
@@ -37,7 +37,7 @@ public class Order extends javax.swing.JFrame {
     public Order(User user){
         initComponents();
         this.user_46=user;
-        userService_46 = new UserService();
+        userService_46 = new Service();
        jLabel1_46.setText("ID khách hàng: "+ user.getId()+" Tên KH: "+user.getTen());
         List<ThucPham> tps = userService_46.getAllTP();
         for (ThucPham tp:tps){

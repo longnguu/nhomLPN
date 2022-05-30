@@ -8,7 +8,7 @@ import User.May;
 import User.PC;
 import User.TBao;
 import User.User;
-import UserService.UserService;
+import Service.Service;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -33,7 +33,7 @@ public class KhachHangView extends javax.swing.JFrame implements ActionListener{
     /**
      * Creates new form KhachHangView
      */
-    UserService userService_40;
+    Service userService_40;
     User user_40,user1_40;
     DefaultTableModel defaultTableModel_40,defaultTableModel1_40,defaultTableModel2_40;
     JButton button[]= new JButton[100];
@@ -44,7 +44,7 @@ public class KhachHangView extends javax.swing.JFrame implements ActionListener{
         initComponents();
         jLabel4.setText("ID: "+user1.getId()+" Họ và tên: "+user1.getTen()+" Số dư tài khoản: "+user1.getTienNo());
         this.user_40=user1;
-        userService_40 = new UserService();
+        userService_40 = new Service();
          defaultTableModel_40 = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column){

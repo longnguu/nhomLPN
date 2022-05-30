@@ -8,7 +8,7 @@ package View;
 import User.DoanhThu;
 import User.ThucPham;
 import User.User;
-import UserService.UserService;
+import Service.Service;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,14 +21,14 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
     /**
      * Creates new form ThongKeDoanhThu
      */
-    UserService userService;
+    Service userService;
     User user;
     ThucPham tp;
     DefaultTableModel defaultTableModel;
     long ttr,ttv;
     public ThongKeDoanhThu() {
         initComponents();
-        userService = new UserService();
+        userService = new Service();
          defaultTableModel = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column){

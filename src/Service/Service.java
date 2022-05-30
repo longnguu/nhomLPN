@@ -1,4 +1,4 @@
-package UserService;
+package Service;
 
 import User.DoanhThu;
 import User.May;
@@ -6,6 +6,8 @@ import User.PC;
 import User.TBao;
 import User.ThucPham;
 import User.User;
+import UserDao.ThietBiDao;
+import UserDao.ThucPhamDao;
 import UserDao.UserDao;
 import java.sql.SQLException;
 import java.util.List;
@@ -16,16 +18,20 @@ import java.util.logging.Logger;
  *
  * @author MY LAPTOP
  */
-public class UserService {
+public class Service {
     private final UserDao userDao;
-    public UserService(){
+    private final ThucPhamDao thucPhamDao;
+    private final ThietBiDao thietBiDao;
+    public Service(){
         userDao=new UserDao();
+        thucPhamDao = new ThucPhamDao();
+        thietBiDao = new ThietBiDao();
     }
     public List<User> getAllUser(){
         try {
             return userDao.getAllUser();
         } catch (SQLException ex) {
-            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -33,7 +39,7 @@ public class UserService {
         try {
             return userDao.searchUser(s);
         } catch (SQLException ex) {
-            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -63,7 +69,7 @@ public class UserService {
         try {
             return userDao.getAllMay();
         } catch (SQLException ex) {
-            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -71,35 +77,35 @@ public class UserService {
         try {
             return userDao.getAllMayByIdKH(id);
         } catch (SQLException ex) {
-            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-      
     public List<ThucPham> getAllThucPham(){
-        return userDao.getAllThucPham();
+        return thucPhamDao.getAllThucPham();
     }
     public void addThucPham(ThucPham tp){
-        userDao.addThucPham(tp);
+        thucPhamDao.addThucPham(tp);
     }
     public void updateThucPham(ThucPham tp){
-        userDao.updateThucPham(tp);
+        thucPhamDao.updateThucPham(tp);
     }
     public void deleteThucPham(int id){
-        userDao.deleteThucPham(id);
+        thucPhamDao.deleteThucPham(id);
     }
     public List<ThucPham> searchThucPham(String s){
-        return userDao.searchThucPham(s);
+        return thucPhamDao.searchThucPham(s);
     }
     public ThucPham getThucPhamById(int id){
-        return userDao.getThucPhamById(id);
-    }
+        return thucPhamDao.getThucPhamById(id);
+    }  
+
     
     public List<DoanhThu> getAllDT(){
         try {
             return userDao.getAllDT();
         } catch (SQLException ex) {
-            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -110,7 +116,7 @@ public class UserService {
         try {
             return userDao.getDTByDate(thang,nam);
         } catch (SQLException ex) {
-            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -118,7 +124,7 @@ public class UserService {
         try {
             return userDao.getAllTP();
         } catch (SQLException ex) {
-            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -126,16 +132,14 @@ public class UserService {
         try {
             return userDao.searchTP1(s);
         } catch (SQLException ex) {
-            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
     public void updateTP(ThucPham user){
         userDao.updateTP(user);
     }
-     public int demPC(){
-        return userDao.demPC();
-    }
+    
     public int demUser(){
         return userDao.demUser();
     }
@@ -149,7 +153,7 @@ public class UserService {
         try {
             return userDao.getAllTB();
         } catch (SQLException ex) {
-            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -166,8 +170,26 @@ public class UserService {
         try {
             return userDao.getAllPC();
         } catch (SQLException ex) {
-            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+     public int demPC(){
+        return userDao.demPC();
+    }
+     public void addPC(PC tp){
+        thietBiDao.addPC(tp);
+    }
+    public void updatePC(PC tp){
+        thietBiDao.updatePC(tp);
+    }
+    public void deletePC(String id){
+        thietBiDao.deletePC(id);
+    }
+    public List<PC> searchPC(String s){
+        return thietBiDao.searchPC(s);
+    }
+    public PC getPCById(String id){
+        return thietBiDao.getPCById(id);
     }
 }

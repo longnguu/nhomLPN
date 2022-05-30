@@ -7,7 +7,7 @@ package View;
 import User.May;
 import User.PC;
 import User.User;
-import UserService.UserService;
+import Service.Service;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,13 +31,13 @@ public class KhachHang extends javax.swing.JPanel implements ActionListener {
     /**
      * Creates new form KhachHang
      */
-    UserService userService_40;
+    Service userService_40;
     User user_40,user1_40;
     DefaultTableModel defaultTableModel_40,defaultTableModel1_40,defaultTableModel2_40;
     JButton button[]= new JButton[100];
     public KhachHang() {
         initComponents();
-        userService_40 = new UserService();
+        userService_40 = new Service();
          defaultTableModel_40 = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column){
@@ -90,7 +90,7 @@ public class KhachHang extends javax.swing.JPanel implements ActionListener {
     public KhachHang(User user1) {
         initComponents();
         this.user1_40=user1;
-        userService_40 = new UserService();
+        userService_40 = new Service();
          defaultTableModel_40 = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column){

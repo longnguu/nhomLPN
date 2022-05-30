@@ -1,7 +1,7 @@
 package View;
 
 import User.User;
-import UserService.UserService;
+import Service.Service;
 import java.awt.CardLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 public class Home extends javax.swing.JFrame {
-    UserService userService_22;
+    Service userService_22;
     User user_22;
     DefaultTableModel defaultTableModel_22,defaultTableModel1_22,defaultTableModel2_22;
     KhachHang khachHangPN_22;
@@ -22,7 +22,7 @@ public class Home extends javax.swing.JFrame {
     public Home() throws FileNotFoundException, IOException{
         initComponents();
         hstTF.setText("1");
-        userService_22 = new UserService();
+        userService_22 = new Service();
         khachHangPN_22 = new KhachHang();
         jTabbedPane1.addTab("Khách hàng", khachHangPN_22);
         jTabbedPane1.addTab("Thống kê", new ThongKeDoanhThu());
@@ -68,7 +68,7 @@ public class Home extends javax.swing.JFrame {
     public Home(User user1) {
         initComponents();
         hstTF.setText("1");
-        userService_22 = new UserService();
+        userService_22 = new Service();
         jTabbedPane1.removeAll();
         khachHangPN_22= new KhachHang(user1);
         jTabbedPane1.addTab("Khách hàng", khachHangPN_22);
@@ -323,12 +323,13 @@ public class Home extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(27, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchTF, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
-                    .addComponent(jButton8)
-                    .addComponent(jButton9)
-                    .addComponent(jButton7))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(searchTF, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton8)
+                        .addComponent(jButton9)
+                        .addComponent(jButton7)))
                 .addContainerGap())
         );
 
