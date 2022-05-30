@@ -168,7 +168,7 @@ public class Service {
     }
     public List<PC> getAllPC(){
         try {
-            return userDao.getAllPC();
+            return thietBiDao.getAllPC();
         } catch (SQLException ex) {
             Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -183,7 +183,7 @@ public class Service {
         return null;
     }
      public int demPC(){
-        return userDao.demPC();
+        return thietBiDao.demPC();
     }
      public void addPC(PC tp){
         thietBiDao.addPC(tp);

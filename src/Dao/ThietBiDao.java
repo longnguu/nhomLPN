@@ -22,7 +22,7 @@ public class ThietBiDao {
      public List<PC> getAllPC() throws SQLException{
         List<PC> users = new ArrayList<>();
         Connection connection = KetNoiSQL.getJDBCConnection();
-        String sql= "SELECT * FROM PC where tthai like '%bt%'";
+        String sql= "SELECT * FROM PC where tthai = 'bt'";
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -67,7 +67,7 @@ public class ThietBiDao {
     }
     public int demPC(){
         Connection connection = KetNoiSQL.getJDBCConnection();
-        String sql= "SELECT * FROM PC";
+        String sql= "SELECT * FROM PC where tthai = 'bt'";
         int i=0;
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
