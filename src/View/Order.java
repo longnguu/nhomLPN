@@ -5,12 +5,15 @@
 package View;
 
 import User.DoanhThu;
+import User.PC;
+import User.TBao;
 import User.ThucPham;
 import User.User;
 import UserService.UserService;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -43,8 +46,13 @@ public class Order extends javax.swing.JFrame {
         for (ThucPham tp:tps){
             jComboBox1_46.addItem(String.valueOf(tp.getTen()));
         }
+        jComboBox2_46.removeAllItems();
+        jComboBox2_46.addItem("Nhận tại quầy");
+        List<PC> pcs = userService_46.getAllPC();
+        for (PC pc:pcs){
+            jComboBox2_46.addItem(pc.getIdPC());
+        }
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,6 +67,8 @@ public class Order extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jSpinner1_46 = new javax.swing.JSpinner();
         jButton1_46 = new javax.swing.JButton();
+        jComboBox2_46 = new javax.swing.JComboBox<>();
+        jLabel2_46 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -93,6 +103,13 @@ public class Order extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1_46, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 450, -1, -1));
 
+        jComboBox2_46.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jComboBox2_46, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
+
+        jLabel2_46.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel2_46.setText("Chọn nơi nhận");
+        getContentPane().add(jLabel2_46, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
+
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Order.png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, -4, 800, 600));
 
@@ -111,6 +128,10 @@ public class Order extends javax.swing.JFrame {
     private void jButton1_46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1_46ActionPerformed
         // TODO add your handling code here:
         DoanhThu dt= new DoanhThu();
+        if (user_46.getTienNo()-Long.valueOf(jLabel2.getText())*Integer.valueOf(String.valueOf(jSpinner1_46.getValue()))<0)
+        {
+            JOptionPane.showMessageDialog(Order.this,"Khong du tien trong tai khoan","Loi",JOptionPane.ERROR_MESSAGE);
+        }else{
         LocalDateTime current = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formatted = current.format(formatter);
@@ -124,7 +145,13 @@ public class Order extends javax.swing.JFrame {
         userService_46.updateTP(tp);
         userService_46.updateUser(user_46);
         userService_46.addDT(dt);
+        
+        TBao tb= new TBao();
+        tb.setNd("ID khách đặt mua: "+user_46.getId()+"\nTên khách đặt mua: "+user_46.getTen()+"\nNhận tại: "+jComboBox2_46.getSelectedItem());
+        userService_46.addTB(tb);
+        
         this.dispose();
+        }                  
     }//GEN-LAST:event_jButton1_46ActionPerformed
 
     /**
@@ -165,8 +192,10 @@ public class Order extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1_46;
     private javax.swing.JComboBox<String> jComboBox1_46;
+    private javax.swing.JComboBox<String> jComboBox2_46;
     private javax.swing.JLabel jLabel1_46;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel2_46;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JSpinner jSpinner1_46;
     // End of variables declaration//GEN-END:variables
