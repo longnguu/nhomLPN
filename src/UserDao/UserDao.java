@@ -7,6 +7,7 @@ package UserDao;
 
 import User.DoanhThu;
 import User.May;
+import User.TBao;
 import User.ThucPham;
 import User.User;
 import java.sql.Connection;
@@ -533,5 +534,132 @@ public class UserDao {
         }catch (SQLException e){
             e.printStackTrace();
         }
+    }
+    public int demPC(){
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql= "SELECT * FROM PC";
+        int i=0;
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                i++;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return i;
+    }
+     public int demUser(){
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql= "SELECT * FROM khachhang";
+        int i=0;
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                i++;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return i;
+    }
+    public int demMay(){
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql= "SELECT * FROM may";
+        int i=0;
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                i++;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return i;
+    }
+    public int demTB(){
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql= "SELECT * FROM thongbao";
+        int i=0;
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                i++;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return i;
+    }
+    public List<TBao> getAllTB() throws SQLException{
+        List<TBao> tbs = new ArrayList<>();
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql= "SELECT * FROM Thongbao";
+        
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                TBao tb = new TBao();
+                
+                tb.setId(rs.getInt("id"));
+                tb.setNd(rs.getString("nd"));
+                
+                
+                tbs.add(tb);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return tbs;
+    }
+    public void addTB(TBao tb){
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql="insert into ThongBao(nd) VALUES (?)";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            
+            preparedStatement.setString(1,tb.getNd());
+            
+            int rs= preparedStatement.executeUpdate();
+            
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public void deleteTB(int id){
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql="delete from thongbao where id= ?";
+        
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            
+            preparedStatement.setInt(1,id);
+               int rs= preparedStatement.executeUpdate();
+            
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public TBao getTBById(int id){
+        Connection con = KetNoiSQL.getJDBCConnection();
+        PreparedStatement ps;
+        TBao tb = new TBao();
+        try {
+            ps = con.prepareStatement("Select * from thongbao where id = ?");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                tb.setId(rs.getInt("ID"));
+                tb.setNd(rs.getString("nd"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return tb;
     }
 }

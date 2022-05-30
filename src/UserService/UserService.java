@@ -2,6 +2,7 @@ package UserService;
 
 import User.DoanhThu;
 import User.May;
+import User.TBao;
 import User.ThucPham;
 import User.User;
 import UserDao.UserDao;
@@ -130,5 +131,34 @@ public class UserService {
     }
     public void updateTP(ThucPham user){
         userDao.updateTP(user);
+    }
+     public int demPC(){
+        return userDao.demPC();
+    }
+    public int demUser(){
+        return userDao.demUser();
+    }
+    public int demMay(){
+        return userDao.demMay();
+    }
+    public int demTB(){
+        return userDao.demTB();
+    }
+    public List<TBao> getAllTB(){
+        try {
+            return userDao.getAllTB();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public void addTB(TBao tb){
+        userDao.addTB(tb);
+    }
+    public void deleteTB(int id){
+        userDao.deleteTB(id);
+    }
+    public TBao getTBById(int id){
+        return userDao.getTBById(id);
     }
 }

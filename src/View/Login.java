@@ -5,6 +5,9 @@
 package View;
 import User.User;
 import UserService.UserService;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 /**
  *
@@ -88,7 +91,11 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(Login.this,"Dang nhap thanh cong","Chao mung",JOptionPane.INFORMATION_MESSAGE);
                     if (user_46.getQuyen().equals("admin"))
                     {
-                        new Home().setVisible(true);
+                        try {
+                            new Home().setVisible(true);
+                        } catch (IOException ex) {
+                            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         this.dispose();
                    }else{
                         new Home(user_46).setVisible(true);
