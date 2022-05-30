@@ -2,6 +2,7 @@ package UserService;
 
 import User.DoanhThu;
 import User.May;
+import User.PC;
 import User.TBao;
 import User.ThucPham;
 import User.User;
@@ -160,5 +161,13 @@ public class UserService {
     }
     public TBao getTBById(int id){
         return userDao.getTBById(id);
+    }
+    public List<PC> getAllPC(){
+        try {
+            return userDao.getAllPC();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

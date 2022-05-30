@@ -5,14 +5,20 @@
 package View;
 
 import User.May;
+import User.PC;
 import User.User;
 import UserService.UserService;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author MY LAPTOP
  */
-public class KhachHang extends javax.swing.JPanel {
+public class KhachHang extends javax.swing.JPanel implements ActionListener {
 
     /**
      * Creates new form KhachHang
@@ -28,6 +34,7 @@ public class KhachHang extends javax.swing.JPanel {
     UserService userService_40;
     User user_40,user1_40;
     DefaultTableModel defaultTableModel_40,defaultTableModel1_40,defaultTableModel2_40;
+    JButton button[]= new JButton[100];
     public KhachHang() {
         initComponents();
         userService_40 = new UserService();
@@ -47,9 +54,16 @@ public class KhachHang extends javax.swing.JPanel {
         
         jComboBox2.removeAllItems();
         jComboBox1.removeAllItems();
-        for (int i = 1;i<=9;i++)
-        {
-            jComboBox1.addItem("May"+i);
+        Icon icon = new ImageIcon("../IMG/computer.png");
+        List<PC> pcs = userService_40.getAllPC();
+        int i=0;
+        jPanel5.removeAll();
+        for (PC pc: pcs){
+            i++;
+            button[i] = new JButton(pc.getIdPC(),icon);
+            jPanel5.add(button[i]);
+            button[i].addActionListener(this);
+            jComboBox1.addItem(String.valueOf(pc.getIdPC()));
         }
         
         List<May> mayss = userService_40.getAllMay();
@@ -65,36 +79,9 @@ public class KhachHang extends javax.swing.JPanel {
         for (May may1: mays){
             defaultTableModel_40.addRow(new Object[]{ may1.getIdMay(),may1.getIdKhach(),may1.getTenKhach(),may1.getBD(),may1.getDonGia()});
             String tm = may1.getIdMay();
-            switch (tm){
-                case "May1":
-                    May1.setBackground(Color.red);
-                    break;
-                case "May2":
-                    May2.setBackground(Color.red);
-                    break;
-                case "May3":
-                    May3.setBackground(Color.red);
-                    break;
-                case "May4":
-                    May4.setBackground(Color.red);
-                    break;
-                case "May5":
-                    May5.setBackground(Color.red);
-                    break;
-                case "May6":
-                    May6.setBackground(Color.red);
-                    break;
-                case "May7":
-                    May7.setBackground(Color.red);
-                    break;
-                case "May8":
-                    May8.setBackground(Color.red);
-                    break;
-                case "May9":
-                    May9.setBackground(Color.red);
-                    break;
-                default:
-                    break;
+            for (int j=1;j<= userService_40.demPC();j++){
+                if (button[j].getText().equals(tm))
+                        button[j].setBackground(Color.red);
             }
         }
         
@@ -129,36 +116,9 @@ public class KhachHang extends javax.swing.JPanel {
         List<May> mays1 = userService_40.getAllMay();
         for (May may1: mays1){
             String tm = may1.getIdMay();
-            switch (tm){
-                case "May1":
-                    May1.setBackground(Color.red);
-                    break;
-                case "May2":
-                    May2.setBackground(Color.red);
-                    break;
-                case "May3":
-                    May3.setBackground(Color.red);
-                    break;
-                case "May4":
-                    May4.setBackground(Color.red);
-                    break;
-                case "May5":
-                    May5.setBackground(Color.red);
-                    break;
-                case "May6":
-                    May6.setBackground(Color.red);
-                    break;
-                case "May7":
-                    May7.setBackground(Color.red);
-                    break;
-                case "May8":
-                    May8.setBackground(Color.red);
-                    break;
-                case "May9":
-                    May9.setBackground(Color.red);
-                    break;
-                default:
-                    break;
+            for (int j=1;j<= userService_40.demPC();j++){
+                if (button[j].getText().equals(tm))
+                        button[j].setBackground(Color.red);
             }
         }
         for (May may1: mays){
@@ -192,7 +152,6 @@ public class KhachHang extends javax.swing.JPanel {
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -263,13 +222,6 @@ public class KhachHang extends javax.swing.JPanel {
 
         jLabel3.setText("ID máy");
 
-        jButton1.setText("Gọi đồ");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jLabel4.setText("Tên khách hàng");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -279,19 +231,19 @@ public class KhachHang extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton10)
-                        .addGap(34, 34, 34)
-                        .addComponent(jButton1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.LEADING, 0, 123, Short.MAX_VALUE))
                         .addGap(44, 44, 44)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jButton10))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,9 +259,7 @@ public class KhachHang extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton10)
-                    .addComponent(jButton1))
+                .addComponent(jButton10)
                 .addContainerGap())
         );
 
@@ -409,36 +359,9 @@ public class KhachHang extends javax.swing.JPanel {
         for (May may1: mays){
             defaultTableModel_40.addRow(new Object[]{ may1.getIdMay(),may1.getIdKhach(),may1.getTenKhach(),may1.getBD(),may1.getDonGia()});
             String tm = may1.getIdMay();
-            switch (tm){
-                case "May1":
-                    May1.setBackground(Color.red);
-                    break;
-                case "May2":
-                    May2.setBackground(Color.red);
-                    break;
-                case "May3":
-                    May3.setBackground(Color.red);
-                    break;
-                case "May4":
-                    May4.setBackground(Color.red);
-                    break;
-                case "May5":
-                    May5.setBackground(Color.red);
-                    break;
-                case "May6":
-                    May6.setBackground(Color.red);
-                    break;
-                case "May7":
-                    May7.setBackground(Color.red);
-                    break;
-                case "May8":
-                    May8.setBackground(Color.red);
-                    break;
-                case "May9":
-                    May9.setBackground(Color.red);
-                    break;
-                default:
-                    break;
+            for (int j=1;j<= userService_40.demPC();j++){
+                if (button[j].getText().equals(tm))
+                        button[j].setBackground(Color.red);
             }
         }
         jComboBox1.removeItem(jComboBox1.getSelectedItem());
@@ -470,36 +393,9 @@ public class KhachHang extends javax.swing.JPanel {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 String formatted = current.format(formatter); 
                 
-            switch (userId){
-                case "May1":
-                    May1.setBackground(new Color(240,240,240));
-                    break;
-                case "May2":
-                    May2.setBackground(new Color(240,240,240));
-                    break;
-                case "May3":
-                    May3.setBackground(new Color(240,240,240));
-                    break;
-                case "May4":
-                    May4.setBackground(new Color(240,240,240));
-                    break;
-                case "May5":
-                    May5.setBackground(new Color(240,240,240));
-                    break;
-                case "May6":
-                    May6.setBackground(new Color(240,240,240));
-                    break;
-                case "May7":
-                    May7.setBackground(new Color(240,240,240));
-                    break;
-                case "May8":
-                    May8.setBackground(new Color(240,240,240));
-                    break;
-                case "May9":
-                    May9.setBackground(new Color(240,240,240));
-                    break;
-                default:
-                    break;
+            for (int j=1;j<= userService_40.demPC();j++){
+                if (button[j].getText().equals(userId))
+                        button[j].setBackground(new Color(240,240,240));
             }
                 
         defaultTableModel_40.setRowCount(0);
@@ -515,17 +411,8 @@ public class KhachHang extends javax.swing.JPanel {
         // TODO add your handling code here:
         User user2 = new User();
         user2 = userService_40.getUserById(Integer.valueOf(String.valueOf(jComboBox2.getSelectedItem())));
-        jLabel4.setText(user2.getTen());
+        jLabel4.setText("Tên: " +user2.getTen()+" Số dư: "+user2.getTienNo());
     }//GEN-LAST:event_jComboBox2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        int id= Integer.valueOf(String.valueOf(jComboBox2.getSelectedItem()));
-        User user = new User();
-        user = userService_40.getUserById(id);
-        System.out.print(user.getTen());
-        new Order(user).setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -538,7 +425,6 @@ public class KhachHang extends javax.swing.JPanel {
     private javax.swing.JButton May7;
     private javax.swing.JButton May8;
     private javax.swing.JButton May9;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -554,4 +440,15 @@ public class KhachHang extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable mayTable;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        List<PC> pcs = userService_40.getAllPC();
+        int i=0;
+        for (PC pc: pcs){
+            if (pc.getIdPC().equals(e.getActionCommand())){
+                jComboBox1.setSelectedItem(pc.getIdPC());
+            };
+            
+        }}
 }

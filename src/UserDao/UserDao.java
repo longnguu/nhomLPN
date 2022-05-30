@@ -7,6 +7,7 @@ package UserDao;
 
 import User.DoanhThu;
 import User.May;
+import User.PC;
 import User.TBao;
 import User.ThucPham;
 import User.User;
@@ -661,5 +662,28 @@ public class UserDao {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return tb;
+    }
+    public List<PC> getAllPC() throws SQLException{
+        List<PC> users = new ArrayList<>();
+        Connection connection = KetNoiSQL.getJDBCConnection();
+        String sql= "SELECT * FROM PC";
+        
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                PC user = new PC();
+                
+                user.setIdPC(rs.getString("id"));
+                user.setTenPC(rs.getString("ten"));
+                user.setTthai(rs.getString("tthai"));
+                
+                
+                users.add(user);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return users;
     }
 }
