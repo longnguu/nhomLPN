@@ -9,6 +9,7 @@ import User.PC;
 import User.User;
 import Service.Service;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
@@ -16,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -54,13 +56,18 @@ public class KhachHang extends javax.swing.JPanel implements ActionListener {
         
         jComboBox2.removeAllItems();
         jComboBox1.removeAllItems();
-        Icon icon = new ImageIcon("../IMG/computer.png");
         List<PC> pcs = userService_40.getAllPC();
         int i=0;
         jPanel5.removeAll();
         for (PC pc: pcs){
             i++;
-            button[i] = new JButton(pc.getIdPC(),icon);
+            button[i] = new JButton(pc.getIdPC());
+            try {
+                Image img = ImageIO.read(getClass().getResource("../IMG/computer.png"));
+                button[i].setIcon(new ImageIcon(img));
+              } catch (Exception ex) {
+                System.out.println(ex);
+              }
             jPanel5.add(button[i]);
             button[i].addActionListener(this);
             jComboBox1.addItem(String.valueOf(pc.getIdPC()));
