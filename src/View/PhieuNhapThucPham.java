@@ -1,9 +1,10 @@
 package View;
 
-import User.ThucPham;
-import UserService.UserService;
+import Model.ThucPham;
+import Service.Service;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -12,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PhieuNhapThucPham extends javax.swing.JFrame {
     DefaultTableModel model;
-    UserService userService;
+    Service userService;
     public PhieuNhapThucPham() {
         initComponents();
         model = new DefaultTableModel();
@@ -21,7 +22,7 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
         model.addColumn("Tên");
         model.addColumn("Giá");
         model.addColumn("Số lượng");
-        userService = new UserService();
+        userService = new Service();
         List<ThucPham> thucPhams = new ArrayList<>();
         thucPhams = userService.getAllThucPham();
         for(ThucPham tp : thucPhams)
@@ -55,7 +56,7 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
         jScrollPane1_26 = new javax.swing.JScrollPane();
         tableTP26 = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1_26.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -63,6 +64,7 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
 
         jLabel1_26.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1_26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1_26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/food.png"))); // NOI18N
         jLabel1_26.setText("PHIẾU NHẬP THỰC PHẨM");
 
         javax.swing.GroupLayout jPanel2_26Layout = new javax.swing.GroupLayout(jPanel2_26);
@@ -93,6 +95,7 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
         jLabel5_26.setText("Số lương nhập");
 
         insertBT26.setBackground(new java.awt.Color(51, 255, 51));
+        insertBT26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/add.png"))); // NOI18N
         insertBT26.setText("Thêm");
         insertBT26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,6 +104,7 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
         });
 
         refreshBT26.setBackground(new java.awt.Color(51, 153, 255));
+        refreshBT26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/refresh.png"))); // NOI18N
         refreshBT26.setText("Tải lại");
         refreshBT26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,7 +158,7 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
                 .addGroup(jPanel3_26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5_26)
                     .addComponent(soLuongTF26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel3_26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(insertBT26)
                     .addComponent(refreshBT26))
@@ -162,6 +166,7 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
         );
 
         deleteBT26.setBackground(new java.awt.Color(255, 51, 51));
+        deleteBT26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/delete.png"))); // NOI18N
         deleteBT26.setText("Xóa");
         deleteBT26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,6 +175,7 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
         });
 
         editBT26.setBackground(new java.awt.Color(51, 255, 51));
+        editBT26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/fix.png"))); // NOI18N
         editBT26.setText("Sửa");
         editBT26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,6 +184,7 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
         });
 
         searchBT26.setBackground(new java.awt.Color(51, 153, 255));
+        searchBT26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/search.png"))); // NOI18N
         searchBT26.setText("Tìm");
         searchBT26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,9 +200,9 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(deleteBT26)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(editBT26, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(searchTF26, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                .addComponent(editBT26)
+                .addGap(6, 6, 6)
+                .addComponent(searchTF26, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchBT26)
                 .addContainerGap())
@@ -304,13 +311,17 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
     private void deleteBT26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBT26ActionPerformed
         // TODO add your handling code here:
         int row = tableTP26.getSelectedRow();
-        int id = Integer.parseInt(String.valueOf(tableTP26.getValueAt(row, 0)));
-        userService.deleteThucPham(id);
-        model.setRowCount(0);
-        List<ThucPham> thucPhams = new ArrayList<>();
-        thucPhams = userService.getAllThucPham();
-        for(ThucPham tp : thucPhams)
-            model.addRow(new Object[]{tp.getId(),tp.getTen(),tp.getGia(),tp.getSoLuong()});
+        if(row == -1)
+            JOptionPane.showMessageDialog(rootPane, "Hãy chọn đối tượng", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        else{
+            int id = Integer.parseInt(String.valueOf(tableTP26.getValueAt(row, 0)));
+            userService.deleteThucPham(id);
+            model.setRowCount(0);
+            List<ThucPham> thucPhams = new ArrayList<>();
+            thucPhams = userService.getAllThucPham();
+            for(ThucPham tp : thucPhams)
+                model.addRow(new Object[]{tp.getId(),tp.getTen(),tp.getGia(),tp.getSoLuong()});
+        }
     }//GEN-LAST:event_deleteBT26ActionPerformed
 
     private void refreshBT26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBT26ActionPerformed
@@ -343,13 +354,17 @@ public class PhieuNhapThucPham extends javax.swing.JFrame {
     private void editBT26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBT26ActionPerformed
         // TODO add your handling code here:
         int row = tableTP26.getSelectedRow();
-        int id = Integer.parseInt(String.valueOf(tableTP26.getValueAt(row, 0)));
-        ThucPham tp = new ThucPham();
-        tp = userService.getThucPhamById(id);
-        idTF26.setText(String.valueOf(tp.getId()));
-        tenTF26.setText(String.valueOf(tp.getTen()));
-        giaTF26.setText(String.valueOf(tp.getGia()));
-        soLuongTF26.setText(String.valueOf(tp.getSoLuong()));
+        if(row == -1)
+            JOptionPane.showMessageDialog(rootPane, "Hãy chọn đối tượng", "Lỗi", JOptionPane.INFORMATION_MESSAGE);
+        else{
+            int id = Integer.parseInt(String.valueOf(tableTP26.getValueAt(row, 0)));
+            ThucPham tp = new ThucPham();
+            tp = userService.getThucPhamById(id);
+            idTF26.setText(String.valueOf(tp.getId()));
+            tenTF26.setText(String.valueOf(tp.getTen()));
+            giaTF26.setText(String.valueOf(tp.getGia()));
+            soLuongTF26.setText(String.valueOf(tp.getSoLuong()));
+        }
     }//GEN-LAST:event_editBT26ActionPerformed
 
     /**

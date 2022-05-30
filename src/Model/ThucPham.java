@@ -1,4 +1,4 @@
-package User;
+package Model;
 public class ThucPham {
     private int id, soLuong;
     private String ten;

@@ -3,8 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View;
-import User.User;
-import UserService.UserService;
+import Model.User;
+import Service.Service;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 /**
  *
@@ -15,7 +18,7 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    UserService userService_46;
+    Service userService_46;
     User user_46;
     public Login() {
         initComponents();
@@ -71,7 +74,7 @@ public class Login extends javax.swing.JFrame {
         String userName= tkTF_46.getText().replaceAll(" ","");
         String password= String.valueOf(mkTF_46.getPassword());
             
-        userService_46=new UserService();
+        userService_46=new Service();
         user_46=userService_46.getUserByUserName(userName);
             
             if (this.user_46 == null)
@@ -88,10 +91,19 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(Login.this,"Dang nhap thanh cong","Chao mung",JOptionPane.INFORMATION_MESSAGE);
                     if (user_46.getQuyen().equals("admin"))
                     {
-                        new Home().setVisible(true);
+                        try {
+                            new Home().setVisible(true);
+                        } catch (IOException ex) {
+                            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         this.dispose();
                    }else{
-                        new Home(user_46).setVisible(true);
+                        try {
+                            new KhachHangView(user_46).setVisible(true);
+                        } catch (IOException ex) {
+                            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        this.dispose();
                     }
             }}
     }//GEN-LAST:event_jButton1_46ActionPerformed

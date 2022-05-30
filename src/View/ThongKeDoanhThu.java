@@ -5,10 +5,10 @@
  */
 package View;
 
-import User.DoanhThu;
-import User.ThucPham;
-import User.User;
-import UserService.UserService;
+import Model.DoanhThu;
+import Model.ThucPham;
+import Model.User;
+import Service.Service;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,14 +21,14 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
     /**
      * Creates new form ThongKeDoanhThu
      */
-    UserService userService;
+    Service userService;
     User user;
     ThucPham tp;
     DefaultTableModel defaultTableModel;
     long ttr,ttv;
     public ThongKeDoanhThu() {
         initComponents();
-        userService = new UserService();
+        userService = new Service();
          defaultTableModel = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column){
@@ -75,7 +75,8 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         dtTable = new javax.swing.JTable();
 
-        jButton1.setText("Lọc");
+        jButton1.setBackground(new java.awt.Color(153, 255, 153));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/filter.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -86,6 +87,8 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
 
         jLabel2.setText("Năm");
 
+        jButton2.setBackground(new java.awt.Color(0, 255, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/refresh.png"))); // NOI18N
         jButton2.setText("Refresh");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,8 +97,18 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
         });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
 
         jSpinner1.setModel(new javax.swing.SpinnerNumberModel(2022, 2022, null, 1));
+        jSpinner1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinner1StateChanged(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel3.setText("jLabel3");
@@ -108,7 +121,9 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(175, 175, 175)
+                .addGap(93, 93, 93)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -119,9 +134,7 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(63, 63, 63)
                         .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 290, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -143,11 +156,12 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton2)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -195,7 +209,7 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 728, Short.MAX_VALUE)
+            .addGap(0, 782, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -204,7 +218,7 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 468, Short.MAX_VALUE)
+            .addGap(0, 482, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -244,6 +258,42 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
         jLabel3.setText("Tổng chi: "+ -ttr);
         jLabel4.setText("Tổng thu: "+ttv);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        // TODO add your handling code here:
+        String thang= String.valueOf(jComboBox1.getSelectedItem());
+        String nam= String.valueOf(jSpinner1.getValue());
+        defaultTableModel.setRowCount(0);
+        ttr=0;ttv=0;
+        List<DoanhThu> dts = userService.getDTByDate(thang, nam);
+        for (DoanhThu dt:dts)
+        {
+            defaultTableModel.addRow(new Object[]{ dt.getId(),dt.getNgay(),dt.getDoanhThu(),dt.getGhiChu()});
+            if (dt.getDoanhThu() < 0) ttr+=dt.getDoanhThu();
+            else ttv+=dt.getDoanhThu();
+        }
+
+        jLabel3.setText("Tổng chi: "+ -ttr);
+        jLabel4.setText("Tổng thu: "+ttv);
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void jSpinner1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner1StateChanged
+        // TODO add your handling code here:
+        String thang= String.valueOf(jComboBox1.getSelectedItem());
+        String nam= String.valueOf(jSpinner1.getValue());
+        defaultTableModel.setRowCount(0);
+        ttr=0;ttv=0;
+        List<DoanhThu> dts = userService.getDTByDate(thang, nam);
+        for (DoanhThu dt:dts)
+        {
+            defaultTableModel.addRow(new Object[]{ dt.getId(),dt.getNgay(),dt.getDoanhThu(),dt.getGhiChu()});
+            if (dt.getDoanhThu() < 0) ttr+=dt.getDoanhThu();
+            else ttv+=dt.getDoanhThu();
+        }
+
+        jLabel3.setText("Tổng chi: "+ -ttr);
+        jLabel4.setText("Tổng thu: "+ttv);
+    }//GEN-LAST:event_jSpinner1StateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
