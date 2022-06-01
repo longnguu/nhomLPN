@@ -209,8 +209,8 @@ public class Home extends javax.swing.JFrame {
         );
 
         jButton10.setBackground(new java.awt.Color(51, 255, 51));
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/add.png"))); // NOI18N
-        jButton10.setText("Nhập thực phẩm");
+        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/restaurant_menu_FILL0_wght400_GRAD0_opsz20.png"))); // NOI18N
+        jButton10.setText("Quản lý thực phẩm");
         jButton10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,8 +227,8 @@ public class Home extends javax.swing.JFrame {
         });
 
         jButton12.setBackground(new java.awt.Color(51, 255, 51));
-        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/add.png"))); // NOI18N
-        jButton12.setText("Mua thêm máy");
+        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/computer.png"))); // NOI18N
+        jButton12.setText("Quản lý thiết bị");
         jButton12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

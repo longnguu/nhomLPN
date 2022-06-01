@@ -147,7 +147,7 @@ public class Order extends javax.swing.JFrame {
         userService_46.addDT(dt);
         
         TBao tb= new TBao();
-        tb.setNd("ID khách đặt mua: "+user_46.getId()+"\nTên khách đặt mua: "+user_46.getTen()+"\nNhận tại: "+jComboBox2_46.getSelectedItem());
+        tb.setNd("ID khách đặt mua: "+user_46.getId()+"\nTên khách đặt mua: "+user_46.getTen()+"\nMua sản phẩm: "+jComboBox1_46.getSelectedItem()+"\nSố lượng: "+jSpinner1_46.getValue()+"\nNhận tại: "+jComboBox2_46.getSelectedItem());
         userService_46.addTB(tb);
         
         this.dispose();
