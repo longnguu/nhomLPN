@@ -92,7 +92,7 @@ public class Order extends javax.swing.JFrame {
 
         jSpinner1_46.setFont(new java.awt.Font("Segoe UI Black", 1, 20)); // NOI18N
         jSpinner1_46.setModel(new javax.swing.SpinnerNumberModel(1, null, null, 1));
-        getContentPane().add(jSpinner1_46, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 340, -1, -1));
+        getContentPane().add(jSpinner1_46, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 340, 80, -1));
 
         jButton1_46.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jButton1_46.setText("Order");

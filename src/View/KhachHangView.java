@@ -74,7 +74,9 @@ public class KhachHangView extends javax.swing.JFrame implements ActionListener{
                 while (true)
                 {   
                     if (kt1==1){
+                        System.out.print(kt1);
                         kt1=0;
+                        
                         setTBDF();
                     }
                     Update();
@@ -508,11 +510,11 @@ public void Update()
         } catch (InterruptedException ex) {
             Logger.getLogger(KhachHangView.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if (kt!=userService_40.demMay()) 
+        if (kt!=userService_40.demPC()) 
         {
             
             kt1=1;
-            kt=userService_40.demMay();
+            kt=userService_40.demPC();
         }
     }
     

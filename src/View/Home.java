@@ -681,6 +681,8 @@ public class Home extends javax.swing.JFrame {
        user_22.setQuyen(role);
        
        userService_22.addUser(user_22); 
+       jLabel14.setText(String.valueOf(userService_22.demUser()));
+       jLabel16.setText(String.valueOf(userService_22.demPC()-userService_22.demMay()+" / "+userService_22.demPC()));
         
         setTable();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -703,6 +705,8 @@ public class Home extends javax.swing.JFrame {
             defaultTableModel_22.addRow(new Object[]{ user.getId(),user.getTen(),user.getTienNo(),user.getTaiKhoan(),user.getQuyen()});
         }
     }}
+        jLabel14.setText(String.valueOf(userService_22.demUser()));
+        jLabel16.setText(String.valueOf(userService_22.demPC()-userService_22.demMay()+" / "+userService_22.demPC()));
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
