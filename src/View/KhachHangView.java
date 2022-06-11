@@ -42,7 +42,7 @@ public class KhachHangView extends javax.swing.JFrame implements ActionListener{
     User user_40,user1_40;
     DefaultTableModel defaultTableModel_40,defaultTableModel1_40,defaultTableModel2_40;
     JButton button[]= new JButton[100];
-    int kt=0,kt1=0;
+    int kt=0,kt1=0,kt2=0;
     public KhachHangView() {
         initComponents();
     }
@@ -510,11 +510,15 @@ public void Update()
         } catch (InterruptedException ex) {
             Logger.getLogger(KhachHangView.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if (kt!=userService_40.demPC()) 
+        if (kt!=userService_40.demMay()) 
         {
             
             kt1=1;
-            kt=userService_40.demPC();
+            kt=userService_40.demMay();
+        }
+        if (kt2!=userService_40.demPC()){
+            kt1=1;
+            kt2=userService_40.demPC();
         }
     }
     
